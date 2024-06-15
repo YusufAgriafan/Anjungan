@@ -6,17 +6,13 @@
     <div class="container-fluid bg-primary hero-header mb-5">
         <div class="container">
             <div class="row g-5 align-items-center">
-                <div class="col-lg-6 text-center text-lg-start">
-                    <h3 class="fw-light text-white animated slideInRight">Natural & Organic</h3>
-                    <h1 class="display-4 text-white animated slideInRight">Hair <span class="fw-light text-dark">Shampoo</span> For Healthy Hair</h1>
-                    <p class="text-white mb-4 animated slideInRight">Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Etiam feugiat rutrum lectus, sed auctor ex malesuada id. Orci varius natoque penatibus et
-                        magnis dis parturient montes.</p>
-                    <a href="" class="btn btn-dark py-2 px-4 me-3 animated slideInRight">Shop Now</a>
-                    <a href="" class="btn btn-outline-dark py-2 px-4 animated slideInRight">Contact Us</a>
-                </div>
-                <div class="col-lg-6">
-                    <img class="img-fluid animated pulse infinite" src="img/shampoo.png" alt="">
+                <div class="col-lg-12 text-center text-lg-start">
+                    <h2 class="fw-light text-white animated slideInRight">Rumah Sakit Islam Aminah Blitar</h2>
+                    <h1 class="display-4 text-white animated slideInRight">Anjungan Pasien Mandiri Pelayanan Rawat Jalan</h1>
+                    <p class="text-white mb-4 animated slideInRight">Selamat datang di anjungan pasien Rumah Sakit Islam Aminah Kota Blitar. 
+                        Kami berkomitmen untuk memberikan pelayanan kesehatan terbaik dengan fasilitas lengkap dan tenaga medis profesional.</p>
+                    <a href="" class="btn btn-dark py-2 px-4 me-3 animated slideInRight">Pelayanan Kami</a>
+                    <a href="" class="btn btn-outline-dark py-2 px-4 animated slideInRight">Hubungi Kami</a>
                 </div>
             </div>
         </div>
@@ -31,24 +27,24 @@
                 <div class="col-lg-4 wow fadeIn" data-wow-delay="0.1s">
                     <div class="feature-item position-relative bg-primary text-center p-3">
                         <div class="border py-5 px-3">
-                            <i class="fa fa-leaf fa-3x text-dark mb-4"></i>
-                            <h5 class="text-white mb-0">100% Natural</h5>
+                            <i class="bi bi-question fa-5x text-white mb-4"></i>
+                            <h5 class="text-white mb-0">Antrian</h5>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-                    <div class="feature-item position-relative bg-primary text-center p-3">
+                    <div class="feature-item position-relative bg-warning text-center p-3">
                         <div class="border py-5 px-3">
-                            <i class="fa fa-tint-slash fa-3x text-dark mb-4"></i>
-                            <h5 class="text-white mb-0">Anti Hair Fall</h5>
+                            <i class="bi bi-person-lines-fill fa-5x text-white mb-4"></i>
+                            <h5 class="text-white mb-0">Daftar</h5>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="feature-item position-relative bg-primary text-center p-3">
+                    <div class="feature-item position-relative bg-danger text-center p-3">
                         <div class="border py-5 px-3">
-                            <i class="fa fa-times fa-3x text-dark mb-4"></i>
-                            <h5 class="text-white mb-0">Hypoallergenic</h5>
+                            <i class="fa-solid fa-stethoscope fa-5x text-white mb-4"></i>
+                            <h5 class="text-white mb-0">Kontrol</h5>
                         </div>
                     </div>
                 </div>
