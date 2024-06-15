@@ -25,40 +25,42 @@
 
 
     <!-- Feature Start -->
-<div class="container-fluid py-5">
-    <div class="container">
-        <div class="row g-4 d-flex justify-content-between">
-            <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.1s">
-                <a href="{{ route('daftar') }}">
-                    <div class="feature-item position-relative bg-primary text-center p-3">
-                        <div class="border py-5 px-3">
-                            <h1 class="text-white mb-0">Antrean</h1>
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row g-4 d-flex justify-content-between">
+                <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.1s">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#modal-lg">
+                        <div class="feature-item position-relative bg-primary text-center p-3">
+                            <div class="border py-5 px-3">
+                                <h1 class="text-white mb-0">Antrean</h1>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.1s">
-                <a href="{{ route('daftar') }}">
-                    <div class="feature-item position-relative bg-primary text-center p-3">
-                        <div class="border py-5 px-3">
-                            <h1 class="text-white mb-0">Daftar</h1>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.1s">
+                    <a href="{{ route('daftar') }}">
+                        <div class="feature-item position-relative bg-primary text-center p-3">
+                            <div class="border py-5 px-3">
+                                <h1 class="text-white mb-0">Daftar</h1>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.1s">
-                <a href="{{ route('daftar') }}">
-                    <div class="feature-item position-relative bg-primary text-center p-3">
-                        <div class="border py-5 px-3">
-                            <h1 class="text-white mb-0">Kontrol</h1>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.1s">
+                    <a href="{{ route('daftar') }}">
+                        <div class="feature-item position-relative bg-primary text-center p-3">
+                            <div class="border py-5 px-3">
+                                <h1 class="text-white mb-0">Kontrol</h1>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Feature End -->
+    <!-- Feature End -->
+
+    @include('modal.antrean')
 
 
 @endsection
