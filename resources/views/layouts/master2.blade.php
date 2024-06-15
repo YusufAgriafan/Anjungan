@@ -45,7 +45,7 @@
 
 
     <!-- Navbar Start -->
-    <div class="container-fluid sticky-top">
+    {{-- <div class="container-fluid sticky-top">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
                 <a href="index.html" class="navbar-brand">
@@ -76,7 +76,7 @@
                 </div>
             </nav>
         </div>
-    </div>
+    </div> --}}
     <!-- Navbar End -->
 
     @yield('content')
