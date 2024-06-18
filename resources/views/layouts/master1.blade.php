@@ -21,6 +21,7 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    
 
     <!-- Libraries Stylesheet -->
     <link href="  {{ asset('/main/lib/animate/animate.min.css ') }}" rel="stylesheet">
@@ -45,13 +46,13 @@
 
 
     <!-- Navbar Start -->
-    {{-- <div class="container-fluid sticky-top">
+    <div class="container-fluid sticky-top">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
                 <a href="index.html" class="navbar-brand">
-                    <h2 class="text-white">Hairnic</h2>
+                    <img src="main/img/logo.png" alt="Hairnic Logo" class="img-fluid" style="width: 250px; height: auto;">
                 </a>
-                <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
+                {{-- <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -73,10 +74,10 @@
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
                     <a href="" class="btn btn-dark py-2 px-4 d-none d-lg-inline-block">Shop Now</a>
-                </div>
+                </div> --}}
             </nav>
         </div>
-    </div> --}}
+    </div>
     <!-- Navbar End -->
 
 @yield('content')
