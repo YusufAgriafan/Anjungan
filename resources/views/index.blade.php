@@ -38,7 +38,7 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.1s">
-                    <a href="{{ route('daftar') }}">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#vertically-centered">
                         <div class="feature-item position-relative bg-primary text-center p-3">
                             <div class="border py-5 px-3">
                                 <h1 class="text-white mb-0">Daftar</h1>
@@ -61,6 +61,7 @@
     <!-- Feature End -->
 
     @include('modal.antrean')
+    @include('modal.daftar')
 
 
 @endsection
