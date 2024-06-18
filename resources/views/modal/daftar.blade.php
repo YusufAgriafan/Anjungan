@@ -36,8 +36,21 @@
         border-radius: 5px;
         cursor: pointer;
       }
+      .btn-primary:active {
+        background-color: #007bff !important;
+        border-color: #007bff !important;
+      }
+
+      .btn-primary:active {
+      background-color: #007bff !important; /* Warna biru */
+      border-color: #007bff !important;
+      }
       .button:disabled {
         background-color: #ccc;
+      }
+      .button:active {
+        background-color: #007bff!important;
+        color: #ffffff!important; /* add this line to set the text color to white */
       }
       .data-rekam-medik, .pilih-poli-dokter, .cetak {
         display: none;
@@ -81,6 +94,7 @@
         border-radius: 5px;
       }
     </style>
+
     <div class="button-group mb-5">
         <button id="btnNoRM" class="button btn btn-primary" onclick="showNoRMSection()">No. RM</button>
         <button id="btnPilihPoliDokter" class="button btn btn-primary" onclick="showPilihPoliDokterSection()" disabled>Pilih Poli dan Dokter</button>
