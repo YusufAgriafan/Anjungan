@@ -1,5 +1,5 @@
 
-  <x-modal id="vertically-centered" title="Pendaftaran Pasien Mandiri (Cara Bayar UMUM)" size="lg"  :centered="true">
+  <x-modal id="daftar" title="Pendaftaran Pasien Mandiri (Cara Bayar UMUM)" size="lg"  :centered="true">
     <x-slot name="body">
       Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
     </x-slot>
@@ -134,7 +134,7 @@
                             <option value="A11">Micare</option>
                             <option value="BPJ">BPJS Kesehatan</option>
                           </select>
-                        <label for="email">Cara Bayar</label>
+                        <label for="cara_bayar">Cara Bayar</label>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -148,10 +148,33 @@
                     <div class="form-floating">
                         <select id="kode_poli" class="form-control" name="kode_poli">
                             <option value="" selected hidden disabled>Pilih Poli</option>
-                            <option value="umum">Umum</option>
-                            <option value="gigi">Gigi</option>
-                            <option value="mata">Mata</option>
-                            <option value="anak">Anak</option>
+                            <option value="IGDK">Unit IGD</option>
+                            <option value="U0001">Poli Umum</option>
+                            <option value="U0002">Poli Anak</option>
+                            <option value="U0003">Poli Obgyn</option>
+                            <option value="U0004">Poli Bedah</option>
+                            <option value="U0005">Poli Mata</option>
+                            <option value="U0006">Poli Gigi</option>
+                            <option value="U0007">Poli Penyakit Dalam</option>
+                            <option value="U0008">Poli Orthopedi</option>
+                            <option value="U0009">Poli Syaraf</option>
+                            <option value="U0010">Poli Paru</option>
+                            <option value="U0011">Poli Kulit &amp; Kelamin</option>
+                            <option value="U0012">Radiologi</option>
+                            <option value="U0013">Laboratorium</option>
+                            <option value="U0015">Rehab Medik</option>
+                            <option value="U0016">Gizi</option>
+                            <option value="U0017">Mom`s Care</option>
+                            <option value="U0018">Poli Nyeri</option>
+                            <option value="U0019">TeleMedicine</option>
+                            <option value="U0020">Poli Andrologi</option>
+                            <option value="U0021">Rehab Medik</option>
+                            <option value="U0022">Farmasi</option>
+                            <option value="U0023">Home Visite</option>
+                            <option value="U0024">Home Care</option>
+                            <option value="U0025">Poli Jantung</option>
+                            <option value="U0026">Poli THT</option>
+                            <option value="U0027">Poli Neurologi</option>
                           </select>
                         <label for="kode_poli">Pilih Poli</label>
                     </div>
@@ -172,7 +195,7 @@
 
                 <div class="col-12">
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="Masukan Alamat Lengkap" id="alamat_lengkap" name="alamat_lengkap" style="height: 150px"></textarea>
+                        <textarea class="form-control" placeholder="Masukan Alamat Lengkap" id="alamat_lengkap" name="alamat_lengkap" style="height: 100px"></textarea>
                         <label for="alamat_lengkap">Alamat Lengkap</label>
                     </div>
                 </div>
@@ -311,6 +334,6 @@
     </script>
     <x-slot name="footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-      <button type="button" class="btn btn-primary">Save changes</button>
+      {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
     </x-slot>
   </x-modal>
