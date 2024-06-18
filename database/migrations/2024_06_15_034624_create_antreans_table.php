@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('antreans', function (Blueprint $table) {
             $table->id();
-            $table->string('code'); // Kode antrian (A1, A2, B1, B2, dst.)
+            $table->string('code');
             $table->timestamps();
         });
     }
