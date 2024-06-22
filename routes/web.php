@@ -3,14 +3,22 @@
 use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AntreanController;
 
 // Route::get('/', function () {
 //     return view('index');
 // });
 
-use App\Http\Controllers\AntreanController;
+
 
 Route::get('/', [AntreanController::class, 'index'])->name('index');
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [LoginController::class, 'auth'])->name('auth');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
 Route::get('/create/{type}', [AntreanController::class, 'create'])->name('antrean.create');
 Route::get('/generate-pdf', [AntreanController::class, 'generatePDF'])->name('generate.pdf');
 
@@ -40,6 +48,13 @@ Route::get('/generate-pdf', function (Illuminate\Http\Request $request) {
     return $pdf->stream('document.pdf');
 })->name('pdf');
 
-Route::get('/adm', function () {
-    return view('admin.admin');
+// Route::get('/generate-pdf', [AntreanController::class, 'generatePDF'])->name('generate.pdf');
+// Route::get('/adm', function () {
+//     return view('admin.admin');
+// });
+
+Route::prefix('dashboard')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('index');
+    
+
 });
