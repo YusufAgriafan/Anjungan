@@ -12,5 +12,10 @@ class MainController extends Controller
         return view('daftar');
     }
 
+    public function test()
+    {
+        return view('admin.test');
+    }
+
     
 }
