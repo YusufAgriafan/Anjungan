@@ -38,3 +38,7 @@ Route::get('/generate-pdf', function (Illuminate\Http\Request $request) {
     // Tampilkan PDF ke browser
     return $pdf->stream('document.pdf');
 })->name('pdf');
+
+Route::get('/adm', function () {
+    return view('admin.admin');
+});
