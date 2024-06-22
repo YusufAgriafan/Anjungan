@@ -19,7 +19,6 @@
     </div>
     <!-- Hero End -->
 
-
     <!-- Feature Start -->
     <div class="container-fluid py-5">
         <div class="container">
@@ -28,6 +27,7 @@
                     <a href="" data-bs-toggle="modal" data-bs-target="#modal-lg">
                         <div class="feature-item position-relative bg-primary text-center p-3">
                             <div class="border py-5 px-3">
+                                <i class="fa fa-question fa-3x text-white mb-4"></i>
                                 <h1 class="text-white mb-0">Antrean</h1>
                             </div>
                         </div>
@@ -35,8 +35,9 @@
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.1s">
                     <a href="" data-bs-toggle="modal" data-bs-target="#daftar">
-                        <div class="feature-item position-relative bg-primary text-center p-3">
+                        <div class="feature-item position-relative bg-warning text-center p-3">
                             <div class="border py-5 px-3">
+                                <i class="fa fa-stethoscope fa-3x text-white mb-4"></i>
                                 <h1 class="text-white mb-0">Daftar</h1>
                             </div>
                         </div>
@@ -44,8 +45,9 @@
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.1s">
                     <a href="" data-bs-toggle="modal" data-bs-target="#kontrol">
-                        <div class="feature-item position-relative bg-primary text-center p-3">
+                        <div class="feature-item position-relative bg-danger text-center p-3">
                             <div class="border py-5 px-3">
+                                <i class="fa fa-user-md fa-3x text-white mb-4"></i>
                                 <h1 class="text-white mb-0">Kontrol</h1>
                             </div>
                         </div>

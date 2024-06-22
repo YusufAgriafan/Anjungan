@@ -36,8 +36,21 @@
         border-radius: 5px;
         cursor: pointer;
       }
+      .btn-primary:active {
+        background-color: #007bff !important;
+        border-color: #007bff !important;
+      }
+
+      .btn-primary:active {
+      background-color: #007bff !important; /* Warna biru */
+      border-color: #007bff !important;
+      }
       .button:disabled {
         background-color: #ccc;
+      }
+      .button:active {
+        background-color: #007bff!important;
+        color: #ffffff!important; /* add this line to set the text color to white */
       }
       .data-rekam-medik, .pilih-poli-dokter, .cetak {
         display: none;
@@ -81,6 +94,7 @@
         border-radius: 5px;
       }
     </style>
+
     <div class="button-group mb-5">
         <button id="btnNoRM" class="button btn btn-primary" onclick="showNoRMSection()">No. RM</button>
         <button id="btnPilihPoliDokter" class="button btn btn-primary" onclick="showPilihPoliDokterSection()" disabled>Pilih Poli dan Dokter</button>
@@ -208,49 +222,49 @@
       </div>
 
       <div class="cetak" id="cetakSection">
-        <h2>Cetak Bukti Daftar</h2>
-        <div class="info-box">
-          <div class="info-title">RS Islam Aminah Blitar</div>
-          <div>Jl. Kenari 54 Plosokerep</div>
-          <div>Sananwetan</div>
-          <div>6282228815210</div>
-        </div>
-        <div class="horizontal-line"></div>
-        <div class="info-box">
-          <div class="info-title">BUKTI PENDAFTARAN</div>
-          <div class="horizontal-line"></div>
-          <div class="form-group">
-            <label class="form-label" for="cetak_nomor_kartu">Nomor Kartu:</label>
-            <input class="form-input" type="text" id="cetak_nomor_kartu" readonly>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="cetak_nama">Nama:</label>
-            <input class="form-input" type="text" id="cetak_nama" readonly>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="cetak_alamat">Alamat:</label>
-            <input class="form-input" type="text" id="cetak_alamat" readonly>
-          </div>
-          <div class="horizontal-line"></div>
-          <div class="form-group">
-            <label class="form-label" for="cetak_cara_bayar">Cara Bayar:</label>
-            <input class="form-input" type="text" id="cetak_cara_bayar" readonly>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="cetak_tanggal_kunjungan">Tanggal Kunjungan:</label>
-            <input class="form-input" type="text" id="cetak_tanggal_kunjungan" readonly>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="cetak_klinik">Klinik:</label>
-            <input class="form-input" type="text" id="cetak_klinik" readonly>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="cetak_dokter">Dokter:</label>
-            <input class="form-input" type="text" id="cetak_dokter" readonly>
-          </div>
-          <p>Terima Kasih Atas kepercayaan Anda. Bawalah kartu Berobat anda dan datang 30 menit sebelumnya.</p>
-          <p>Bawalah surat rujukan atau surat kontrol asli dan tunjukkan pada petugas di Lobby resepsionis.</p>
-          <button class="button" onclick="window.print()">Cetak</button>
+        <div class="container">
+            <div class="info-box">
+                <div class="info-title">RS Islam Aminah Blitar</div>
+                <div style="text-align: center;">Jl. Kenari 54 Plosokerep</div>
+                <div style="text-align: center;">Sananwetan</div>
+                <div style="text-align: center;">6282228815210</div>
+            </div>
+            <div class="horizontal-line"></div>
+            <div class="info-box">
+                <div class="info-title">BUKTI PENDAFTARAN</div>
+                <div class="horizontal-line"></div>
+                <div class="form-group">
+                    <label class="form-label" for="cetak_nomor_kartu">Nomor Kartu:</label>
+                    <input class="form-input" type="text" id="cetak_nomor_kartu" value="1234567890" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="cetak_nama">Nama:</label>
+                    <input class="form-input" type="text" id="cetak_nama" value="John Doe" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="cetak_alamat">Alamat:</label>
+                    <input class="form-input" type="text" id="cetak_alamat" value="Jl. Merdeka No. 123" readonly>
+                </div>
+                <div class="horizontal-line"></div>
+                <div class="form-group">
+                    <label class="form-label" for="cetak_cara_bayar">Cara Bayar:</label>
+                    <input class="form-input" type="text" id="cetak_cara_bayar" value="Tunai" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="cetak_tanggal_kunjungan">Tanggal Kunjungan:</label>
+                    <input class="form-input" type="text" id="cetak_tanggal_kunjungan" value="2024-06-30" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="cetak_klinik">Klinik:</label>
+                    <input class="form-input" type="text" id="cetak_klinik" value="Klinik Umum" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="cetak_dokter">Dokter:</label>
+                    <input class="form-input" type="text" id="cetak_dokter" value="Dr. Smith" readonly>
+                </div><br>
+                <p style="text-align: center;">Terima Kasih Atas kepercayaan Anda. Bawalah kartu Berobat anda dan datang 30 menit sebelumnya.</p>
+                <p style="text-align: center;">Bawalah surat rujukan atau surat kontrol asli dan tunjukkan pada petugas di Lobby resepsionis.</p>
+            </div>
         </div>
       </div>
       <div class="progress">
