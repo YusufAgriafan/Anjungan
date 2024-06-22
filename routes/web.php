@@ -14,6 +14,7 @@ Route::get('/', [AntreanController::class, 'index'])->name('index');
 Route::get('/create/{type}', [AntreanController::class, 'create'])->name('antrean.create');
 Route::get('/generate-pdf', [AntreanController::class, 'generatePDF'])->name('generate.pdf');
 
+Route::get('/antrean', [AntreanController::class, 'antrean'])->name('antrean');
 
 Route::get('/form', function () {
     return view('contact');

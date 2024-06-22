@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Hairnic - Single Product Website Template</title>
+    <title>Antrean - RS Islam Aminah Blitar</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -86,14 +86,14 @@
     <div class="container-fluid bg-white footer">
         <div class="container py-5">
             <div class="row g-5">
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+                <div class="col-md-6 col-lg-6 wow fadeIn" data-wow-delay="0.3s">
                     <a href="index.html" class="navbar-brand">
                         <img src="main/img/logo.png" alt="Hairnic Logo" class="img-fluid" style="width: 250px; height: auto;">
                     </a>
                     <p class="mb-0">Selamat datang di anjungan pasien Rumah Sakit Islam Aminah Kota Blitar. 
                         Kami berkomitmen untuk memberikan pelayanan kesehatan terbaik dengan fasilitas lengkap dan tenaga medis profesional.</p>
                 </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
+                <div class="col-md-6 col-lg-6 wow fadeIn" data-wow-delay="0.3s">
                     <h5 class="mb-4">Get In Touch</h5>
                     <p><i class="fa fa-map-marker-alt me-3"></i>Jalan Kenari, Kota Blitar, Indonesia</p>
                     <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
@@ -124,26 +124,7 @@
                 </div> -->
             </div>
         </div>
-        <div class="container wow fadeIn" data-wow-delay="0.1s">
-            <div class="copyright">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
 
-                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
-                    </div>
-                    <!-- <div class="col-md-6 text-center text-md-end">
-                        <div class="footer-menu">
-                            <a href="">Home</a>
-                            <a href="">Cookies</a>
-                            <a href="">Help</a>
-                            <a href="">FAQs</a>
-                        </div>
-                    </div> -->
-                </div>
-            </div>
-        </div>
     </div>
     <!-- Footer End -->
 

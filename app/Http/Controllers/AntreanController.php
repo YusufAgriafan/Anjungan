@@ -47,4 +47,11 @@ class AntreanController extends Controller
     {
         // Implementasi untuk generate PDF
     }
+
+    public function antrean()
+    {
+        $pendingAntreans = Antrean::where('served', false)->orderBy('created_at', 'asc')->take(3)->get();
+
+        return view('antrean', compact('pendingAntreans'));
+    }
 }
