@@ -34,13 +34,8 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.1s">
-<<<<<<<<< Temporary merge branch 1
-                    <a href="" data-bs-toggle="modal" data-bs-target="#vertically-centered">
-                        <div class="feature-item position-relative bg-warning text-center p-3">
-=========
                     <a href="" data-bs-toggle="modal" data-bs-target="#daftar">
-                        <div class="feature-item position-relative bg-primary text-center p-3">
->>>>>>>>> Temporary merge branch 2
+                        <div class="feature-item position-relative bg-warning text-center p-3">
                             <div class="border py-5 px-3">
                                 <i class="fa fa-stethoscope fa-3x text-white mb-4"></i>
                                 <h1 class="text-white mb-0">Daftar</h1>
