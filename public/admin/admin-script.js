@@ -3,6 +3,10 @@ $(document).ready(function() {
     $('.content').hide();
     $('#loket').show();
 
+    // public/js/admin-script.js
+
+
+
     // Handling navigation between Antrian Loket dan Antrian CS
     $('.navbar ul li a').on('click', function(e) {
         e.preventDefault();
