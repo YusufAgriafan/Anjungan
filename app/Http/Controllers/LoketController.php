@@ -67,11 +67,6 @@ class LoketController extends Controller
     {
         $loket = loket::findOrFail($id);
 
-        $imagePath = public_path('img/info/').$loket->img_info;
-        if (file_exists($imagePath)) {
-            unlink($imagePath);
-        }
-
         $loket->delete();
 
         return redirect()->route('admin.loket.index')->with('success', 'Loket Berhasil Dihapus!');

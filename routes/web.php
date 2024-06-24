@@ -53,7 +53,9 @@ Route::prefix('dashboard')->name('admin.')->middleware('auth')->group(function (
 
     Route::prefix('/antrean')->name('antrean.')->group(function () {
         Route::get('/{codeLoket}', [AdminAntreanController::class, 'index'])->name('index');
-        Route::get('/{codeLoket}/destroy', [AdminAntreanController::class, 'destroy'])->name('destroy');
+        Route::post('/dashboard/antrean/telat/{id}', [AdminAntreanController::class, 'telat'])->name('telat');
+        // Route::get('/{codeLoket}/destroy', [AdminAntreanController::class, 'destroy'])->name('destroy');
+        Route::delete('loket/{id}/destroy', [AdminAntreanController::class, 'destroy'])->name('destroy');
     });
 
     // Route::get('/antrean', [AntreanController::class, 'daftarantrean'])->name('antrean.index');

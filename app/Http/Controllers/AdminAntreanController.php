@@ -19,23 +19,32 @@ class AdminAntreanController extends Controller
     {
         $antrean = antrean::findOrFail($id);
 
-        $imagePath = public_path('img/info/').$antrean->img_info;
-        if (file_exists($imagePath)) {
-            unlink($imagePath);
-        }
-
         $antrean->delete();
 
-        return redirect()->route('admin.antrean.index')->with('success', 'Informasi Berhasil Dihapus!');
+        return redirect()->route('admin.antrean.index')->with('success', 'Antrean Berhasil Dihapus!');
     }
 
     public function index($codeLoket)
     {
-        $antrean = Antrean::where('codeLoket', $codeLoket)->get();
+        // Mengambil antrean dan mengurutkan berdasarkan updated_at dari yang paling lama
+        $antrean = Antrean::where('codeLoket', $codeLoket)
+            ->orderBy('updated_at', 'asc')
+            ->get();
 
         return view('admin.antrean.index', [
             'antrean' => $antrean,
         ]);
+    }
+
+    public function telat($id)
+    {
+        // Mengambil antrean berdasarkan ID dan mengupdate updated_at ke waktu saat ini
+        $antrean = Antrean::findOrFail($id);
+        $antrean->updated_at = now();
+        $antrean->save();
+
+        // Redirect kembali ke halaman antrean dengan pesan sukses
+        return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean diperbarui.');
     }
     // public function destroy($quiz_id, Antrean $question)
     // {

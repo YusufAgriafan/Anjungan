@@ -38,12 +38,15 @@
                                     @foreach($antrean as $item)
                                         <tr>
                                             <td>{{ $item->code }}</td>
-                                            <td>{{ $item->created_at->format('Y-m-d') }}</td> <!-- Format the date -->
-                                            <td>{{ $item->created_at->format('H:i:s') }}</td>
+                                            <td>{{ $item->updated_at->format('Y-m-d') }}</td> <!-- Format the date -->
+                                            <td>{{ $item->updated_at->format('H:i:s') }}</td>
                                             <td>
                                                 <button class="btn btn-success">Panggil</button>
-                                                <button class="btn btn-warning">Telat</button>
-                                                <form action="{{ route('admin.antrean.destroy', $item->id) }}" class="d-inline" onsubmit="return confirm('Apakah kamu yakin menghapus informasi ini?')" method="POST">
+                                                <button class="btn btn-warning" onclick="event.preventDefault(); if(confirm('Apakah benar telat?')) { document.getElementById('telat-form-{{ $item->id }}').submit(); }">Telat</button>
+                                                <form id="telat-form-{{ $item->id }}" action="{{ route('admin.antrean.telat', $item->id) }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                                <form action="{{ route('admin.antrean.destroy', $item->id) }}" class="d-inline" onsubmit="return confirm('Apakah kamu yakin menghapus antrean ini?')" method="POST">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit" class="btn btn-danger border-0">Hapus</button>
