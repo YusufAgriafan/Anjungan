@@ -15,19 +15,19 @@ class AdminAntreanController extends Controller
         return view('admin.antrean', compact('antrean'));
     }
 
-    public function destroy($id)
-    {
-        $antrean = antrean::findOrFail($id);
+    // public function destroy($id)
+    // {
+    //     $antrean = antrean::findOrFail($id);
 
-        $antrean->delete();
+    //     $antrean->delete();
 
-        return redirect()->route('admin.antrean.index')->with('success', 'Antrean Berhasil Dihapus!');
-    }
+    //     return redirect()->route('admin.antrean.index')->with('success', 'Antrean Berhasil Dihapus!');
+    // }
 
     public function index($codeLoket)
     {
-        // Mengambil antrean dan mengurutkan berdasarkan updated_at dari yang paling lama
         $antrean = Antrean::where('codeLoket', $codeLoket)
+            ->where('served', 0)
             ->orderBy('updated_at', 'asc')
             ->get();
 
@@ -38,12 +38,10 @@ class AdminAntreanController extends Controller
 
     public function telat($id)
     {
-        // Mengambil antrean berdasarkan ID dan mengupdate updated_at ke waktu saat ini
         $antrean = Antrean::findOrFail($id);
         $antrean->updated_at = now();
         $antrean->save();
 
-        // Redirect kembali ke halaman antrean dengan pesan sukses
         return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean diperbarui.');
     }
     // public function destroy($quiz_id, Antrean $question)
@@ -54,4 +52,24 @@ class AdminAntreanController extends Controller
 
     //     return redirect()->route('admin.q.index', $quiz_id)->with('success', 'Question Berhasil Dihapus!');
     // }
+
+    public function destroy($id)
+    {
+        $antrean = Antrean::findOrFail($id);
+        $codeLoket = $antrean->codeLoket;
+        $antrean->delete();
+
+        return redirect()->route('admin.antrean.index', $codeLoket)->with('success', 'Antrean berhasil dihapus.');
+    }
+
+    public function serve($id)
+    {
+        $antrean = Antrean::findOrFail($id);
+        $antrean->served = 1;
+        $antrean->updated_at = now();
+        $antrean->save();
+
+        // Redirect kembali ke halaman antrean dengan pesan sukses
+        return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean telah dilayani.');
+    }
 }

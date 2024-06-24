@@ -1,6 +1,6 @@
 
 @extends('layouts.admin')
-@section('admin_kuis', 'active')
+@section('admin_loket', 'active')
 
 @section('content')
 

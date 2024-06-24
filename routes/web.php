@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\AdminAntreanController;
 use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\AntreanController;
 use App\Http\Controllers\LoketController;
+use App\Http\Controllers\AntreanController;
+use App\Http\Controllers\TerlayaniController;
+use App\Http\Controllers\AdminAntreanController;
 
 Route::get('/', [AntreanController::class, 'index'])->name('index');
 Route::get('/login', [LoginController::class, 'login'])->name('login');
@@ -54,8 +55,14 @@ Route::prefix('dashboard')->name('admin.')->middleware('auth')->group(function (
     Route::prefix('/antrean')->name('antrean.')->group(function () {
         Route::get('/{codeLoket}', [AdminAntreanController::class, 'index'])->name('index');
         Route::post('/dashboard/antrean/telat/{id}', [AdminAntreanController::class, 'telat'])->name('telat');
-        // Route::get('/{codeLoket}/destroy', [AdminAntreanController::class, 'destroy'])->name('destroy');
-        Route::delete('loket/{id}/destroy', [AdminAntreanController::class, 'destroy'])->name('destroy');
+        Route::post('/dashboard/antrean/serve/{id}', [AdminAntreanController::class, 'serve'])->name('serve');
+        Route::delete('/dashboard/antrean/{id}', [AdminAntreanController::class, 'destroy'])->name('destroy');
+
+    });
+
+    Route::prefix('/terlayani')->name('serve.')->group(function () {
+        Route::get('/', [TerlayaniController::class, 'index'])->name('index');
+
     });
 
     // Route::get('/antrean', [AntreanController::class, 'daftarantrean'])->name('antrean.index');

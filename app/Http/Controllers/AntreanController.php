@@ -10,18 +10,15 @@ class AntreanController extends Controller
     // Menampilkan halaman antrian
     public function index()
     {
-        // Ambil kode antrian terakhir dari database untuk tipe 'A' dan 'B'
         $lastLoketCode = Antrean::where('code', 'LIKE', 'A%')->orderBy('created_at', 'desc')->first();
         $lastCsCode = Antrean::where('code', 'LIKE', 'B%')->orderBy('created_at', 'desc')->first();
 
-        // Hitung kode antrian berikutnya
         $nextLoketCode = $lastLoketCode ? 'A' . (intval(substr($lastLoketCode->code, 1)) + 1) : 'A1';
         $nextCsCode = $lastCsCode ? 'B' . (intval(substr($lastCsCode->code, 1)) + 1) : 'B1';
 
         return view('index', compact('nextLoketCode', 'nextCsCode'));
     }
 
-    // Membuat kode antrian baru
     public function create($type)
     {
         // Validasi tipe antrian

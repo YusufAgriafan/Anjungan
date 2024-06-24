@@ -1,6 +1,6 @@
 
 @extends('layouts.admin')
-@section('admin_kuis', 'active')
+@section('admin_loket', 'active')
 
 @section('content')
 
@@ -43,7 +43,7 @@
                                                 <a href="{{ route('admin.antrean.index', $item->codeLoket) }}">
                                                     <label class="btn btn-success">Antrean</label>
                                                 </a>
-                                                <form action="{{ route('admin.loket.destroy', $item->id) }}" class="d-inline" onsubmit="return confirm('Apakah Anda Yakin Menghapus Loket')" method="POST">
+                                                <form action="{{ route('admin.loket.destroy', $item->id, $item->codeLoket) }}" class="d-inline" onsubmit="return confirm('Apakah Anda Yakin Menghapus Loket')" method="POST">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit" class="btn btn-danger border-0">Hapus</button>
