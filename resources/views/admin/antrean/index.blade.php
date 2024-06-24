@@ -18,8 +18,6 @@
             </div>
 
             <!-- Tabel Daftar Loket -->
-
-            
             <div class="col-lg-12 mt-4">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Tabel Daftar Loket</h6>
@@ -38,10 +36,10 @@
                                     @foreach($antrean as $item)
                                         <tr>
                                             <td>{{ $item->code }}</td>
-                                            <td>{{ $item->updated_at->format('Y-m-d') }}</td> <!-- Format the date -->
+                                            <td>{{ $item->updated_at->format('Y-m-d') }}</td>
                                             <td>{{ $item->updated_at->format('H:i:s') }}</td>
                                             <td>
-                                                <button class="btn btn-success">Panggil</button>
+                                                <button class="btn btn-success panggil-btn" data-code="{{ $item->code }}">Panggil</button>
                                                 <button class="btn btn-warning" onclick="event.preventDefault(); if(confirm('Apakah benar telat?')) { document.getElementById('telat-form-{{ $item->id }}').submit(); }">Telat</button>
                                                 <form id="telat-form-{{ $item->id }}" action="{{ route('admin.antrean.telat', $item->id) }}" method="POST" style="display: none;">
                                                     @csrf
@@ -65,9 +63,7 @@
                                 @endif
                             </tbody>
                         </table>
-
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -82,11 +78,10 @@
         }
 
         #currentDateTime {
-        text-align: center; /* Membuat teks berada di tengah */
-        font-size: 24px; /* Ukuran font yang lebih besar */
-        margin-bottom: 20px; /* Jarak bawah dari elemen sebelumnya */
+            text-align: center; /* Membuat teks berada di tengah */
+            font-size: 24px; /* Ukuran font yang lebih besar */
+            margin-bottom: 20px; /* Jarak bawah dari elemen sebelumnya */
         }
-
     </style>
 
     <!-- Script untuk Tanggal dan Waktu Saat Ini -->
@@ -101,6 +96,50 @@
         setInterval(updateDateTime, 1000); // Update setiap detik
     </script>
 
-    <script src="{{ asset('admin/admin-script.js') }}"></script>
+    <!-- Script untuk Suara Panggilan -->
+    <script>
+        let voices = [];
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            speechSynthesis.onvoiceschanged = () => {
+                voices = speechSynthesis.getVoices();
+                console.log('Available voices:', voices);
+
+                const panggilButtons = document.querySelectorAll('.panggil-btn');
+                panggilButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const code = this.getAttribute('data-code');
+                        panggilAntrean(code);
+                    });
+                });
+            };
+        });
+
+        function panggilAntrean(code) {
+            const msg = new SpeechSynthesisUtterance();
+            msg.lang = 'id-ID';
+            const voice = voices.find(voice => voice.name === 'Google Bahasa Indonesia');
+            if (voice) {
+                msg.voice = voice;
+            } else {
+                console.error('Voice not found!');
+            }
+            msg.text = `Antrian Nomor ${code} silahkan ke loket A`;
+
+            msg.onstart = function(event) {
+                console.log('Suara dimulai:', event);
+            };
+
+            msg.onend = function(event) {
+                console.log('Suara selesai:', event);
+            };
+
+            msg.onerror = function(event) {
+                console.error('Error pada suara:', event);
+            };
+
+            window.speechSynthesis.speak(msg);
+        }
+    </script>
 
 @endsection
