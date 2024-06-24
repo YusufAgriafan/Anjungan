@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('code');
             $table->boolean('served')->default(false);
-            $table->string('loket')->nullable();
+            $table->string('codeLoket', 1)->nullable();
             $table->timestamps();
         });
     }

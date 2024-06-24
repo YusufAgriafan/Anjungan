@@ -34,7 +34,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(count($antrean))
+                                @if($antrean && count($antrean) > 0)
                                     @foreach($antrean as $item)
                                         <tr>
                                             <td>{{ $item->code }}</td>

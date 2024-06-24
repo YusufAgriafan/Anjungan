@@ -31,12 +31,12 @@ class AdminAntreanController extends Controller
 
     public function index($codeLoket)
     {
+        $antrean = Antrean::where('codeLoket', $codeLoket)->get();
+
         return view('admin.antrean.index', [
-            'code' => Antrean::where('code', $codeLoket)->get(),
-            'codeLoket' => $codeLoket,
+            'antrean' => $antrean,
         ]);
     }
-
     // public function destroy($quiz_id, Antrean $question)
     // {
     //     $question->delete();

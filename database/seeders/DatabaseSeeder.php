@@ -29,21 +29,25 @@ class DatabaseSeeder extends Seeder
         DB::table('antreans')->insert([
             [
                 'code' => 'A1',
+                'codeLoket' => 'A',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'code' => 'A2',
+                'codeLoket' => 'A',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'code' => 'B1',
+                'codeLoket' => 'B',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'code' => 'B2',
+                'codeLoket' => 'B',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]

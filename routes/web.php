@@ -39,8 +39,7 @@ Route::get('/generate-pdf', function (Illuminate\Http\Request $request) {
 Route::prefix('dashboard')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');
 
-    Route::get('/antrean', [AntreanController::class, 'daftarantrean'])->name('antrean.index');
-    Route::delete('antrean/{code}/destroy', [AntreanController::class, 'destroy'])->name('antrean.destroy');
+    
     
     Route::name('loket.')->group(function () {
         Route::get('/loket', [loketController::class, 'index'])->name('index');
@@ -49,15 +48,14 @@ Route::prefix('dashboard')->name('admin.')->middleware('auth')->group(function (
         Route::post('loket/store', [loketController::class, 'store'])->name('store');
         Route::get('loket/{codeLoket}/edit', [loketController::class, 'edit'])->name('edit');
         Route::put('loket/{codeLoket}/update', [loketController::class, 'update'])->name('update');
-        Route::delete('loket/{code}/destroy', [loketController::class, 'destroy'])->name('destroy');
+        Route::delete('loket/{codeLoket}/destroy', [loketController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('/antrean')->name('antrean.')->group(function () {
         Route::get('/{codeLoket}', [AdminAntreanController::class, 'index'])->name('index');
-        Route::get('/{code}/create', [AdminAntreanController::class, 'create'])->name('create');
-        Route::post('/{code}/store', [AdminAntreanController::class, 'store'])->name('store');
-        Route::get('/{code}/{question}/edit', [AdminAntreanController::class, 'edit'])->name('edit');
-        Route::post('/{code}/{question}/edit', [AdminAntreanController::class, 'update'])->name('update');
-        Route::get('/{code}/{question}/destroy', [AdminAntreanController::class, 'destroy'])->name('destroy');
+        Route::get('/{codeLoket}/destroy', [AdminAntreanController::class, 'destroy'])->name('destroy');
     });
+
+    // Route::get('/antrean', [AntreanController::class, 'daftarantrean'])->name('antrean.index');
+    // Route::delete('antrean/{code}/destroy', [AntreanController::class, 'destroy'])->name('antrean.destroy');
 });
