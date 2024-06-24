@@ -25,5 +25,41 @@ class DatabaseSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('antreans')->insert([
+            [
+                'code' => 'A1',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'code' => 'A2',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'code' => 'B1',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'code' => 'B2',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+            
+        ]);
+
+        DB::table('lokets')->insert([
+            ['codeLoket' => 'A',
+            'created_at' => now(),
+            'updated_at' => now(),],
+            ['codeLoket' => 'B',
+            'created_at' => now(),
+            'updated_at' => now(),],
+            ['codeLoket' => 'C',
+            'created_at' => now(),
+            'updated_at' => now(),]
+        ]);
     }
 }

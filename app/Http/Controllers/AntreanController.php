@@ -54,4 +54,25 @@ class AntreanController extends Controller
 
         return view('antrean', compact('pendingAntreans'));
     }
+
+    public function daftarantrean()
+    {
+        $antrean = Antrean::latest()->get();;
+
+        return view('admin.antrean', compact('antrean'));
+    }
+
+    public function destroy($id)
+    {
+        $antrean = antrean::findOrFail($id);
+
+        $imagePath = public_path('img/info/').$antrean->img_info;
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
+        $antrean->delete();
+
+        return redirect()->route('admin.antrean.index')->with('success', 'Informasi Berhasil Dihapus!');
+    }
 }

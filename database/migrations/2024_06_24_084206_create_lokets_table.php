@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('antreans', function (Blueprint $table) {
+        Schema::create('lokets', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
-            $table->boolean('served')->default(false);
-            $table->string('loket')->nullable();
+            $table->string('codeLoket', 1)->unique();
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('antreans');
+        Schema::dropIfExists('lokets');
     }
 };

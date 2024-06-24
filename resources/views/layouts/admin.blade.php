@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Admin Pesi</title>
+    <title>Admin</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -45,8 +45,8 @@
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
-                <a href="{{ route('test') }}" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>Admin Pesi</h3>
+                <a href="" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>Admin</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -59,28 +59,10 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="{{ route('test') }}" class="nav-item nav-link @yield('admin_dashboard')"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="{{ route('admin.loket.index') }}" class="nav-item nav-link @yield('admin_antrean')"><i class="fa fa-tachometer-alt me-2"></i>Loket</a>
+                    <a href="{{ route('admin.antrean.index') }}" class="nav-item nav-link @yield('admin_antrean')"><i class="fa fa-tachometer-alt me-2"></i>Antrean</a>
                     <a href="{{ route('logout') }}" class="nav-item nav-link" id="logout-link"><i class="fa fa-chart-bar me-2"></i>Log Out</a>
 
-                    <script>
-                        document.getElementById('logout-link').addEventListener('click', function(event) {
-                            event.preventDefault();
-                            
-                            fetch("{{ route('logout') }}", {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                }
-                            }).then(response => {
-                                if (response.ok) {
-                                    // Redirect to the login page or any other page after successful logout
-                                    window.location.href = '/';
-                                }
-                            }).catch(error => {
-                                console.error('Error:', error);
-                            });
-                        });
                     </script>
                 </div>
             </nav>

@@ -19,13 +19,11 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        // Cek apakah kredensial benar
         if (Auth::attempt($credentials)) {
-            // Periksa apakah pengguna telah diverifikasi
             if (Auth::user()->email_verified_at !== null) {
                 $request->session()->regenerate();
 
-                return back()->with('success', 'Login Berhasil');
+                return redirect()->route('admin.loket.index');
             } else {
                 Auth::logout();
 
@@ -39,9 +37,6 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
 
         return redirect()->route('index');
     }
