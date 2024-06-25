@@ -1,10 +1,10 @@
 @extends('layouts.admin')
-@section('admin_loket', 'active')
+@section('admin_table', 'active')
 
 @section('content')
 
     <!-- Queue Counter Start -->
-    <div class="container-fluid pt-4 px-4">
+    <div class="container-fluid pt-2 px-2">
         <div class="row g-4">
 
             <div class="col-lg-12">
@@ -39,7 +39,7 @@
                                             <td>{{ $item->updated_at->format('Y-m-d') }}</td>
                                             <td>{{ $item->updated_at->format('H:i:s') }}</td>
                                             <td>
-                                                {{-- <button class="btn btn-success panggil-btn" data-code="{{ $item->code }}">Panggil</button> --}}
+                                                <button class="btn btn-success panggil-btn" data-code="{{ $item->code }}">Panggil</button>
                                                 <button class="btn btn-warning" onclick="event.preventDefault(); if(confirm('Apakah benar telat?')) { document.getElementById('telat-form-{{ $item->id }}').submit(); }">Telat</button>
                                                 <form id="telat-form-{{ $item->id }}" action="{{ route('admin.antrean.telat', $item->id) }}" method="POST" style="display: none;">
                                                     @csrf
@@ -48,10 +48,6 @@
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit" class="btn btn-danger border-0">Hapus</button>
-                                                </form>
-                                                <button class="btn btn-primary" onclick="event.preventDefault(); if(confirm('Apakah antrean ini sudah terlayani?')) { document.getElementById('serve-form-{{ $item->id }}').submit(); }">Terlayani</button>
-                                                <form id="serve-form-{{ $item->id }}" action="{{ route('admin.antrean.serve', $item->id) }}" method="POST" style="display: none;">
-                                                    @csrf
                                                 </form>
                                             </td>
                                         </tr>

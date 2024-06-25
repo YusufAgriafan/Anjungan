@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Antrean;
+use App\Models\Loket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,15 +15,6 @@ class AdminAntreanController extends Controller
 
         return view('admin.antrean', compact('antrean'));
     }
-
-    // public function destroy($id)
-    // {
-    //     $antrean = antrean::findOrFail($id);
-
-    //     $antrean->delete();
-
-    //     return redirect()->route('admin.antrean.index')->with('success', 'Antrean Berhasil Dihapus!');
-    // }
 
     public function index($codeLoket)
     {
@@ -38,14 +30,29 @@ class AdminAntreanController extends Controller
 
     public function panggil()
     {
-        $antrean = Antrean::where('served', 0)
-            ->orderBy('updated_at', 'asc')
-            ->get();
-
+        // Ambil semua data loket
+        $lokets = Loket::all();
+    
+        // Inisialisasi array untuk menampung antrean berdasarkan loket
+        $antreansByLoket = [];
+    
+        // Loop untuk setiap loket
+        foreach ($lokets as $loket) {
+            // Ambil antrean yang belum dilayani (served = 0) berdasarkan codeLoket
+            $antreans = Antrean::where('served', 0)
+                ->where('codeLoket', $loket->codeLoket)
+                ->orderBy('updated_at', 'asc')
+                ->get();
+    
+            // Tambahkan ke array $antreansByLoket dengan key berdasarkan codeLoket
+            $antreansByLoket[$loket->codeLoket] = $antreans;
+        }
+    
         return view('admin.antrean.panggil', [
-            'antrean' => $antrean,
+            'antreansByLoket' => $antreansByLoket, // Mengirimkan array antrean berdasarkan loket ke view
+            'lokets' => $lokets, // Mengirimkan daftar loket ke view
         ]);
-    }
+    }    
 
     public function telat($id)
     {
@@ -55,14 +62,6 @@ class AdminAntreanController extends Controller
 
         return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean diperbarui.');
     }
-    // public function destroy($quiz_id, Antrean $question)
-    // {
-    //     $question->delete();
-
-    //     $role = Auth::user()->role;
-
-    //     return redirect()->route('admin.q.index', $quiz_id)->with('success', 'Question Berhasil Dihapus!');
-    // }
 
     public function destroy($id)
     {
