@@ -36,6 +36,17 @@ class AdminAntreanController extends Controller
         ]);
     }
 
+    public function panggil()
+    {
+        $antrean = Antrean::where('served', 0)
+            ->orderBy('updated_at', 'asc')
+            ->get();
+
+        return view('admin.antrean.panggil', [
+            'antrean' => $antrean,
+        ]);
+    }
+
     public function telat($id)
     {
         $antrean = Antrean::findOrFail($id);

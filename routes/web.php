@@ -40,8 +40,6 @@ Route::get('/generate-pdf', function (Illuminate\Http\Request $request) {
 Route::prefix('dashboard')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');
 
-    
-    
     Route::name('loket.')->group(function () {
         Route::get('/loket', [loketController::class, 'index'])->name('index');
         Route::get('loket/show', [loketController::class, 'index'])->name('show');
@@ -54,17 +52,18 @@ Route::prefix('dashboard')->name('admin.')->middleware('auth')->group(function (
 
     Route::prefix('/antrean')->name('antrean.')->group(function () {
         Route::get('/{codeLoket}', [AdminAntreanController::class, 'index'])->name('index');
-        Route::post('/dashboard/antrean/telat/{id}', [AdminAntreanController::class, 'telat'])->name('telat');
-        Route::post('/dashboard/antrean/serve/{id}', [AdminAntreanController::class, 'serve'])->name('serve');
-        Route::delete('/dashboard/antrean/{id}', [AdminAntreanController::class, 'destroy'])->name('destroy');
+        
+        Route::post('/telat/{id}', [AdminAntreanController::class, 'telat'])->name('telat');
+        Route::post('/serve/{id}', [AdminAntreanController::class, 'serve'])->name('serve');
+        Route::delete('/{id}', [AdminAntreanController::class, 'destroy'])->name('destroy');
 
     });
+
+    Route::get('/panggil', [AdminAntreanController::class, 'panggil'])->name('panggil');
 
     Route::prefix('/terlayani')->name('serve.')->group(function () {
         Route::get('/', [TerlayaniController::class, 'index'])->name('index');
 
     });
 
-    // Route::get('/antrean', [AntreanController::class, 'daftarantrean'])->name('antrean.index');
-    // Route::delete('antrean/{code}/destroy', [AntreanController::class, 'destroy'])->name('antrean.destroy');
 });

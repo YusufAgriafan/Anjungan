@@ -34,6 +34,7 @@ class AntreanController extends Controller
         // Simpan kode antrian baru ke database
         $antrean = new Antrean();
         $antrean->code = $newCode;
+        $antrean->codeLoket = $type;
         $antrean->save();
 
         return redirect()->route('index')->with('success', 'Kode antrian baru telah dibuat');

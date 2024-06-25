@@ -60,6 +60,7 @@
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="{{ route('admin.loket.index') }}" class="nav-item nav-link @yield('admin_loket')"><i class="fa fa-tachometer-alt me-2"></i>Loket</a>
+                    <a href="{{ route('admin.panggil') }}" class="nav-item nav-link @yield('admin_panggil')"><i class="fa fa-tachometer-alt me-2"></i>Panggil</a>
                     <a href="{{ route('admin.serve.index') }}" class="nav-item nav-link @yield('admin_serve')"><i class="fa fa-tachometer-alt me-2"></i>Terlayani</a>
                     <a href="{{ route('logout') }}" class="nav-item nav-link" id="logout-link"><i class="fa fa-chart-bar me-2"></i>Log Out</a>
                     </script>
