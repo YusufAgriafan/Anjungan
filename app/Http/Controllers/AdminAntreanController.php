@@ -15,26 +15,35 @@ class AdminAntreanController extends Controller
         return view('admin.antrean', compact('antrean'));
     }
 
-    // public function destroy($id)
-    // {
-    //     $antrean = antrean::findOrFail($id);
-
-    //     $antrean->delete();
-
-    //     return redirect()->route('admin.antrean.index')->with('success', 'Antrean Berhasil Dihapus!');
-    // }
-
     public function index($codeLoket)
     {
-        $antrean = Antrean::where('codeLoket', $codeLoket)
-            ->where('served', 0)
-            ->orderBy('updated_at', 'asc')
-            ->get();
+        if ($codeLoket === 'A' || $codeLoket === 'B') {
+            $antrean = Antrean::where('codeLoket', $codeLoket)
+                ->where('served', 0)
+                ->orderBy('updated_at', 'asc')
+                ->get();
+                return view('admin.antrean.index', [
+                    'antrean' => $antrean,
+                ]);
+        } else {
+            $allAntrean = Antrean::where('served', 0)
+                ->orderBy('updated_at', 'asc')
+                ->get();
 
-        return view('admin.antrean.index', [
-            'antrean' => $antrean,
-        ]);
+            $filteredAntrean = Antrean::where('codeLoket', $codeLoket)
+                ->where('served', 0)
+                ->orderBy('updated_at', 'asc')
+                ->get();
+
+            return view('admin.antrean.tambahan', [
+                'allAntrean' => $allAntrean,
+                'filteredAntrean' => $filteredAntrean,
+                'codeLoket' => $codeLoket,
+            ]);
+        }
+        
     }
+
 
     public function panggil()
     {
@@ -55,14 +64,6 @@ class AdminAntreanController extends Controller
 
         return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean diperbarui.');
     }
-    // public function destroy($quiz_id, Antrean $question)
-    // {
-    //     $question->delete();
-
-    //     $role = Auth::user()->role;
-
-    //     return redirect()->route('admin.q.index', $quiz_id)->with('success', 'Question Berhasil Dihapus!');
-    // }
 
     public function destroy($id)
     {
@@ -80,7 +81,16 @@ class AdminAntreanController extends Controller
         $antrean->updated_at = now();
         $antrean->save();
 
-        // Redirect kembali ke halaman antrean dengan pesan sukses
         return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean telah dilayani.');
     }
+
+    public function ubah($id, $codeLoket)
+{
+    $antrean = Antrean::findOrFail($id);
+
+    $antrean->codeLoket = $codeLoket;
+    $antrean->save();
+
+    return redirect()->route('admin.antrean.index', $codeLoket)->with('success', 'Antrean diperbarui.');
+}
 }

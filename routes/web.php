@@ -55,6 +55,7 @@ Route::prefix('dashboard')->name('admin.')->middleware('auth')->group(function (
         
         Route::post('/telat/{id}', [AdminAntreanController::class, 'telat'])->name('telat');
         Route::post('/serve/{id}', [AdminAntreanController::class, 'serve'])->name('serve');
+        Route::put('/admin/antrean/{id}/ubah/{codeLoket}', [AdminAntreanController::class, 'ubah'])->name('ubah');
         Route::delete('/{id}', [AdminAntreanController::class, 'destroy'])->name('destroy');
 
     });
