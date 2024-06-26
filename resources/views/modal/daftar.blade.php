@@ -98,21 +98,43 @@
     <div class="button-group mb-5">
         <button id="btnNoRM" class="button btn btn-primary" onclick="showNoRMSection()">No. RM</button>
         <button id="btnPilihPoliDokter" class="button btn btn-primary" onclick="showPilihPoliDokterSection()" disabled>Pilih Poli dan Dokter</button>
-        <button id="btnCetak" class="button btn btn-primary" onclick="showCetakSection()" disabled>Cetak</button>
     </div>
       <div class="data-rekam-medik" id="noRMSection">
         <form>
             <div class="row g-3">
                 <div class="col-12">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="nomorKartuBerobat" name="nomorKartuBerobat" placeholder="Nomor Kartu Berobat">
-                        <label for="nomorKartuBerobat">Nomor Kartu Berobat</label>
+                        <input type="text" class="form-control" id="no_kartu_berobat" name="no_kartu_berobat" placeholder="Nomor Kartu Berobat">
+                        <label for="no_kartu_berobat">Nomor Kartu Berobat</label>
                     </div>
                 </div>
                 <div class="col-12">
-                    <button class="btn btn-primary w-100 py-3" onclick="cekKartu()" type="button">Simpan Pendaftaran</button>
+                    <button class="btn btn-primary w-100 py-3" onclick="cekKartu()" type="button">Cek Kartu Berobat</button>
                 </div>
             </div>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+            function cekKartu() {
+                var no_kartu_berobat = $('#no_kartu_berobat').val();
+                
+            
+                $.ajax({
+                    url: '{{ route("cek.kartu.berobat") }}',
+                    type: 'GET',
+                    data: { no_kartu_berobat: no_kartu_berobat },
+                    success: function(response) {
+                        if (response.exists) {
+                            $('#pilihPoliDokterSection').show();
+                            $('#noRMSection').hide();
+                            document.getElementById("btnPilihPoliDokter").disabled = false;
+                            document.getElementById("progressBar").style.width = "100%";
+                        } else {
+                            alert('Nomor Kartu Berobat tidak ditemukan');
+                        }
+                    }
+                });
+            }
+            </script>
         </form>
       </div>
       <div class="pilih-poli-dokter" id="pilihPoliDokterSection">
@@ -120,20 +142,20 @@
             <div class="row g-3">
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="nomorKartuBerobat" name="nomorKartuBerobat" placeholder="Nomor Rekam Medik">
-                        <label for="nomorKartuBerobat">Nomor Rekam Medik</label>
+                        <input type="text" class="form-control" id="no_rkm_medis" name="no_rkm_medis" placeholder="Nomor Rekam Medik">
+                        <label for="no_rkm_medis">Nomor Rekam Medik</label>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" placeholder="Nama Lengkap">
-                        <label for="nama_lengkap">Nama Lengkap</label>
+                        <input type="text" class="form-control" id="nm_pasien" name="nm_pasien" placeholder="Nama Lengkap">
+                        <label for="nm_pasien">Nama Lengkap</label>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <select id="cara_bayar" class="form-control" name="cara_bayar">
+                        <select id="metode_pembayaran" class="form-control" name="metode_pembayaran">
                             <option value="" selected hidden disabled>Pilih Metode Pembayaran</option>
                             <option value="A01">Umum</option>
                             <option value="A02">Sinarmas</option>
@@ -148,7 +170,7 @@
                             <option value="A11">Micare</option>
                             <option value="BPJ">BPJS Kesehatan</option>
                           </select>
-                        <label for="cara_bayar">Cara Bayar</label>
+                        <label for="metode_pembayaran">Cara Bayar</label>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -160,7 +182,7 @@
 
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <select id="kode_poli" class="form-control" name="kode_poli">
+                        <select id="kd_poli" class="form-control" name="kd_poli">
                             <option value="" selected hidden disabled>Pilih Poli</option>
                             <option value="IGDK">Unit IGD</option>
                             <option value="U0001">Poli Umum</option>
@@ -190,27 +212,27 @@
                             <option value="U0026">Poli THT</option>
                             <option value="U0027">Poli Neurologi</option>
                           </select>
-                        <label for="kode_poli">Pilih Poli</label>
+                        <label for="kd_poli">Pilih Poli</label>
                     </div>
                 </div>
                 
 
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <select id="kode_dokter" class="form-control" name="kode_dokter">
+                        <select id="kd_dokter" class="form-control" name="kd_dokter">
                             <option value="" selected hidden disabled>Pilih Dokter</option>
                             <option value="dr_andi">Dr. Andi</option>
                             <option value="dr_sri">Dr. Sri</option>
                             <option value="dr_budi">Dr. Budi</option>
                           </select>
-                        <label for="kode_dokter">Pilih Dokter</label>
+                        <label for="kd_dokter">Pilih Dokter</label>
                     </div>
                 </div>
 
                 <div class="col-12">
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="Masukan Alamat Lengkap" id="alamat_lengkap" name="alamat_lengkap" style="height: 100px"></textarea>
-                        <label for="alamat_lengkap">Alamat Lengkap</label>
+                        <textarea class="form-control" placeholder="Masukan Alamat Lengkap" id="alamat" name="alamat" style="height: 100px"></textarea>
+                        <label for="alamat">Alamat Lengkap</label>
                     </div>
                 </div>
 
@@ -220,53 +242,54 @@
             </div>
         </form>
       </div>
+      <script>
+        function confirmAndPrint(message, number, type) {
+            if (confirm(message)) {
+                var printWindow = window.open(`{{ route('pdf') }}?number=${number}&type=${type}`, '_blank');
+                printWindow.addEventListener('load', function() {
+                    printWindow.print();
+                });
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+        function submitPilihPoliDokter() {
+            if (confirm("Apakah Anda yakin ingin menyimpan pendaftaran ini?")) {
+                var formData = {
+                    no_rkm_medis: $('#no_rkm_medis').val().trim(),
+                    nm_pasien: $('#nm_pasien').val().trim(),
+                    metode_pembayaran: $('#metode_pembayaran').val(),
+                    tanggal_kunjungan: $('#tanggal_kunjungan').val(),
+                    kd_poli: $('#kd_poli').val(),
+                    kd_dokter: $('#kd_dokter').val(),
+                    alamat: $('#alamat').val().trim()
+                };
 
-      <div class="cetak" id="cetakSection">
-        <div class="container">
-            <div class="info-box">
-                <div class="info-title">RS Islam Aminah Blitar</div>
-                <div style="text-align: center;">Jl. Kenari 54 Plosokerep</div>
-                <div style="text-align: center;">Sananwetan</div>
-                <div style="text-align: center;">6282228815210</div>
-            </div>
-            <div class="horizontal-line"></div>
-            <div class="info-box">
-                <div class="info-title">BUKTI PENDAFTARAN</div>
-                <div class="horizontal-line"></div>
-                <div class="form-group">
-                    <label class="form-label" for="cetak_nomor_kartu">Nomor Kartu:</label>
-                    <input class="form-input" type="text" id="cetak_nomor_kartu" value="1234567890" readonly>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="cetak_nama">Nama:</label>
-                    <input class="form-input" type="text" id="cetak_nama" value="John Doe" readonly>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="cetak_alamat">Alamat:</label>
-                    <input class="form-input" type="text" id="cetak_alamat" value="Jl. Merdeka No. 123" readonly>
-                </div>
-                <div class="horizontal-line"></div>
-                <div class="form-group">
-                    <label class="form-label" for="cetak_cara_bayar">Cara Bayar:</label>
-                    <input class="form-input" type="text" id="cetak_cara_bayar" value="Tunai" readonly>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="cetak_tanggal_kunjungan">Tanggal Kunjungan:</label>
-                    <input class="form-input" type="text" id="cetak_tanggal_kunjungan" value="2024-06-30" readonly>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="cetak_klinik">Klinik:</label>
-                    <input class="form-input" type="text" id="cetak_klinik" value="Klinik Umum" readonly>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="cetak_dokter">Dokter:</label>
-                    <input class="form-input" type="text" id="cetak_dokter" value="Dr. Smith" readonly>
-                </div><br>
-                <p style="text-align: center;">Terima Kasih Atas kepercayaan Anda. Bawalah kartu Berobat anda dan datang 30 menit sebelumnya.</p>
-                <p style="text-align: center;">Bawalah surat rujukan atau surat kontrol asli dan tunjukkan pada petugas di Lobby resepsionis.</p>
-            </div>
-        </div>
-      </div>
+                $.ajax({
+                    url: '{{ route("simpan.pendaftaran") }}',
+                    type: 'POST',
+                    data: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            alert('Pendaftaran berhasil disimpan');
+                            // Optionally, you can reset the form after successful submission
+                            // $('#myForm')[0].reset();
+                        } else {
+                            alert('Terjadi kesalahan saat menyimpan pendaftaran');
+                        }
+                    }
+                });
+            }
+        }
+      </script>
+
       <div class="progress">
         <div class="progress-bar" id="progressBar"></div>
       </div>
@@ -278,72 +301,9 @@
       function showNoRMSection() {
         document.getElementById("noRMSection").style.display = "block";
         document.getElementById("pilihPoliDokterSection").style.display = "none";
-        document.getElementById("cetakSection").style.display = "none";
-        document.getElementById("progressBar").style.width = "33%";
+        document.getElementById("progressBar").style.width = "50%";
       }
-  
-      function showPilihPoliDokterSection() {
-        if (!nomorRMValid) {
-          alert("Silakan masukkan Nomor Kartu Berobat yang valid.");
-          return;
-        }
-        document.getElementById("noRMSection").style.display = "none";
-        document.getElementById("pilihPoliDokterSection").style.display = "block";
-        document.getElementById("cetakSection").style.display = "none";
-        document.getElementById("progressBar").style.width = "66%";
-      }
-  
-      function showCetakSection() {
-        if (!pilihPoliDokterValid) {
-          alert("Silakan lengkapi form Pilih Poli dan Dokter terlebih dahulu.");
-          return;
-        }
-        document.getElementById("noRMSection").style.display = "none";
-        document.getElementById("pilihPoliDokterSection").style.display = "none";
-        document.getElementById("cetakSection").style.display = "block";
-        document.getElementById("progressBar").style.width = "100%";
-        
-        // Mengisi nilai pada form cetak
-        document.getElementById("cetak_nomor_kartu").value = document.getElementById("nomorKartuBerobat").value;
-        document.getElementById("cetak_nama").value = document.getElementById("nama_lengkap").value;
-        document.getElementById("cetak_alamat").value = document.getElementById("alamat_lengkap").value;
-        document.getElementById("cetak_cara_bayar").value = document.getElementById("cara_bayar").value;
-        document.getElementById("cetak_tanggal_kunjungan").value = document.getElementById("tanggal_kunjungan").value;
-        document.getElementById("cetak_klinik").value = document.getElementById("kode_poli").options[document.getElementById("kode_poli").selectedIndex].text;
-        document.getElementById("cetak_dokter").value = document.getElementById("kode_dokter").options[document.getElementById("kode_dokter").selectedIndex].text;
-      }
-  
-      function cekKartu() {
-        let nomorKartu = document.getElementById("nomorKartuBerobat").value.trim();
-        if (nomorKartu !== "") {
-          nomorRMValid = true;
-          document.getElementById("btnPilihPoliDokter").disabled = false;
-          showPilihPoliDokterSection();
-        } else {
-          nomorRMValid = false;
-          document.getElementById("btnPilihPoliDokter").disabled = true;
-        }
-      }
-  
-      function submitPilihPoliDokter() {
-        let namaLengkap = document.getElementById("nama_lengkap").value.trim();
-        let alamatLengkap = document.getElementById("alamat_lengkap").value.trim();
-        let tanggalKunjungan = document.getElementById("tanggal_kunjungan").value.trim();
-        let caraBayar = document.getElementById("cara_bayar").value;
-        let kodePoli = document.getElementById("kode_poli").value;
-        let kodeDokter = document.getElementById("kode_dokter").value;
-  
-        if (namaLengkap !== "" && alamatLengkap !== "" && tanggalKunjungan !== "" && caraBayar !== "" && kodePoli !== "" && kodeDokter !== "") {
-          pilihPoliDokterValid = true;
-          document.getElementById("btnCetak").disabled = false;
-          showCetakSection();
-        } else {
-          pilihPoliDokterValid = false;
-          document.getElementById("btnCetak").disabled = true;
-          alert("Semua field harus diisi.");
-        }
-      }
-  
+
       showNoRMSection();
     </script>
     <x-slot name="footer">

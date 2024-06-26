@@ -6,9 +6,11 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LoketController;
+use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\AntreanController;
 use App\Http\Controllers\TerlayaniController;
 use App\Http\Controllers\AdminAntreanController;
+use App\Http\Controllers\KartuBerobatController;
 
 Route::get('/', [AntreanController::class, 'index'])->name('index');
 Route::get('/login', [LoginController::class, 'login'])->name('login');
@@ -19,6 +21,10 @@ Route::get('/create/{type}', [AntreanController::class, 'create'])->name('antrea
 Route::get('/generate-pdf', [AntreanController::class, 'generatePDF'])->name('generate.pdf');
 
 Route::get('/antrean', [AntreanController::class, 'antrean'])->name('antrean');
+Route::get('/cek-kartu-berobat', [KartuBerobatController::class, 'cekKartuBerobat'])->name('cek.kartu.berobat');
+Route::post('/simpan-pendaftaran', [DaftarController::class, 'simpanPendaftaran'])->name('simpan.pendaftaran');
+
+
 
 Route::get('/form', function () {
     return view('contact');

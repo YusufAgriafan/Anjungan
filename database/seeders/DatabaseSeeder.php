@@ -65,5 +65,62 @@ class DatabaseSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),]
         ]);
+
+        DB::table('kartu_berobats')->insert([
+            [
+                'no_kartu_berobat' => 'KB001',
+                'nm_pasien' => 'John Doe',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'no_kartu_berobat' => 'KB002',
+                'nm_pasien' => 'Jane Doe',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+
+        DB::table('pasiens')->insert([
+            [
+                'no_rkm_medis' => 'RM001',
+                'nm_pasien' => 'John Doe',
+                'alamat' => '123 Main St',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'no_rkm_medis' => 'RM002',
+                'nm_pasien' => 'Jane Doe',
+                'alamat' => '456 Oak St',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+
+        DB::table('daftars')->insert([
+            [
+                'no_rkm_medis' => 'RM001',
+                'nm_pasien' => 'John Doe',
+                'metode_pembayaran' => 'BPJS',
+                'tanggal_kunjungan' => '2024-06-26',
+                'kd_poli' => 'U0001',
+                'kd_dokter' => 'dr_andi',
+                'alamat' => '123 Main St',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'no_rkm_medis' => 'RM002',
+                'nm_pasien' => 'Jane Doe',
+                'metode_pembayaran' => 'Umum',
+                'tanggal_kunjungan' => '2024-06-27',
+                'kd_poli' => 'U0002',
+                'kd_dokter' => 'dr_sri',
+                'alamat' => '456 Oak St',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
     }
 }

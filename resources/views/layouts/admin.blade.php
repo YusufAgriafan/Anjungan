@@ -62,7 +62,7 @@
                     <a href="{{ route('admin.loket.index') }}" class="nav-item nav-link @yield('admin_loket')"><i class="fa fa-users me-2"></i>Loket</a>
                     <a href="{{ route('admin.panggil') }}" class="nav-item nav-link @yield('admin_panggil')"><i class="fa fa-volume-up me-2"></i>Panggil</a>
                     <a href="{{ route('admin.serve.index') }}" class="nav-item nav-link @yield('admin_serve')"><i class="fa fa-table me-2"></i>Terlayani</a>
-                    <a href="{{ route('logout') }}" class="nav-item nav-link" id="logout-link"><i class="fa fa-sign-out me-2"></i>Log Out</a>
+                    <a href="{{ route('logout') }}" class="nav-item nav-link" id="logout-link"><i class="fa fa-chart-bar me-2"></i>Log Out</a>
                     </script>
                 </div>
             </nav>
@@ -97,7 +97,7 @@
             @yield('content')
 
             <!-- Footer Start -->
-            <div class="container-fluid pt-2 px-2">
+            <div class="container-fluid pt-4 px-4">
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
