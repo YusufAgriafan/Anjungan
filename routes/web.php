@@ -24,8 +24,6 @@ Route::get('/antrean', [AntreanController::class, 'antrean'])->name('antrean');
 Route::get('/cek-kartu-berobat', [KartuBerobatController::class, 'cekKartuBerobat'])->name('cek.kartu.berobat');
 Route::post('/simpan-pendaftaran', [DaftarController::class, 'simpanPendaftaran'])->name('simpan.pendaftaran');
 
-
-
 Route::get('/form', function () {
     return view('contact');
 });
@@ -58,6 +56,7 @@ Route::prefix('dashboard')->name('admin.')->middleware('auth')->group(function (
 
     Route::prefix('/antrean')->name('antrean.')->group(function () {
         Route::get('/{codeLoket}', [AdminAntreanController::class, 'index'])->name('index');
+        Route::get('/display/{codeLoket}', [AdminAntreanController::class, 'showTopAntrean'])->name('display');
         
         Route::post('/telat/{id}', [AdminAntreanController::class, 'telat'])->name('telat');
         Route::post('/serve/{id}', [AdminAntreanController::class, 'serve'])->name('serve');

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Loket;
 use App\Models\Antrean;
+use Illuminate\Http\Request;
 
 class AntreanController extends Controller
 {
@@ -46,11 +47,33 @@ class AntreanController extends Controller
         // Implementasi untuk generate PDF
     }
 
+    // public function antrean()
+    // {
+    //     $pendingAntreans = Antrean::where('served', false)->orderBy('created_at', 'asc')->take(3)->get();
+    //     return view('antrean', compact('pendingAntreans'));
+    // }
+
     public function antrean()
     {
-        $pendingAntreans = Antrean::where('served', false)->orderBy('created_at', 'asc')->take(3)->get();
+        $lokets = Loket::all();
 
-        return view('antrean', compact('pendingAntreans'));
+        $topAntrean = [];
+        foreach ($lokets as $loket) {
+            $antrean = Antrean::where('codeLoket', $loket->codeLoket)
+                ->where('served', false)
+                ->orderBy('updated_at', 'asc')
+                ->first();
+            $topAntrean[$loket->codeLoket] = $antrean;
+        }
+
+        $allAntrean = Antrean::where('served', false)
+            ->orderBy('updated_at', 'asc')
+            ->get();
+
+        return view('antreanTest', [
+            'topAntrean' => $topAntrean,
+            'allAntrean' => $allAntrean,
+        ]);
     }
 
     public function daftarantrean()

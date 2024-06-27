@@ -18,33 +18,15 @@
                         <iframe width="650" height="355" src="https://www.youtube.com/embed/0RY8FqWRNP4?playlist=0RY8FqWRNP4&loop=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					</div>
 				</div>
-                <div class="col-lg-5 col-md-6 mb-4 ">
-                    <div class="feature-item position-relative bg-primary text-center">
-                        <div class="borde">
-                            <h1 class="text-white mb-0" >Loket {{ $codeLoket }}</h1>
-                        </div>
-                    </div>
-                    <div class="feature-item position-relative bg-primary text-center p-3">
-                        <div class="border">
-                            @if($antreanNow)
-                                <h1 class="text-white mb-0" style="font-size: 14em;">{{ $antreanNow->code }}</h1>
-                            @else
-                                <h1 class="text-white mb-0" style="font-size: 5em;">-</h1>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-
                 @foreach($topAntrean as $codeLoket => $antreanNow)
-                    <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="col-lg-5 col-md-6 mb-4">
                         <div class="feature-item position-relative bg-primary text-center">
                             <div class="borde">
-                                <h3 class="text-white mb-0" >Loket {{ $codeLoket }}</h3>
+                                <h1 class="text-white mb-0">Loket {{ $codeLoket }}</h1>
                             </div>
                         </div>
-                        <div class="feature-item position-relative bg-primary text-center">
+                        <div class="feature-item position-relative bg-primary text-center p-3">
                             <div class="border">
-                                {{-- <h1 class="text-white mb-0" style="font-size: 5em;">{{ $antrean->code }}</h1> --}}
                                 @if($antreanNow)
                                     <h1 class="text-white mb-0" style="font-size: 5em;">{{ $antreanNow->code }}</h1>
                                 @else
@@ -53,7 +35,8 @@
                             </div>
                         </div>
                     </div>
-                @endforeach 
+                @endforeach
+
 
 			</div>
 		</div>

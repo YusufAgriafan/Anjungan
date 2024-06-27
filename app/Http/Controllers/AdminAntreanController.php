@@ -46,6 +46,55 @@ class AdminAntreanController extends Controller
     }
 
 
+    public function test($codeLoket)
+    {
+            $antreanNow = Antrean::where('codeLoket', $codeLoket)
+                ->where('served', 0)
+                ->orderBy('updated_at', 'asc')
+                ->take(1)
+                ->get();
+
+            $allAntrean = Antrean::where('served', 0)
+                ->orderBy('updated_at', 'asc')
+                ->get();
+
+            return view('antrean', [
+                'antreanNow' => $antreanNow,
+                'allAntrean' => $allAntrean,
+                'codeLoket' => $codeLoket,
+            ]);
+        
+    }
+
+    public function showTopAntrean($codeLoket)
+    {
+        $antreanNow = Antrean::where('codeLoket', $codeLoket)
+            ->where('served', false)
+            ->orderBy('updated_at', 'asc')
+            ->first();
+
+        // $allAntrean = Antrean::where('served', false)
+        //     ->orderBy('updated_at', 'asc')
+        //     ->get();
+
+        $lokets = Loket::all();
+
+        $topAntrean = [];
+        foreach ($lokets as $loket) {
+            $antrean = Antrean::where('codeLoket', $loket->codeLoket)
+                ->where('served', false)
+                ->orderBy('updated_at', 'asc')
+                ->first();
+            $topAntrean[$loket->codeLoket] = $antrean;
+        }
+
+        return view('antrean', [
+            'antreanNow' => $antreanNow,
+            'topAntrean' => $topAntrean,
+            'codeLoket' => $codeLoket,
+        ]);
+    }
+
     public function panggil()
     {
         // Ambil semua data loket

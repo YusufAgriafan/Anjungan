@@ -43,6 +43,9 @@
                                                 <a href="{{ route('admin.antrean.index', $item->codeLoket) }}">
                                                     <label class="btn btn-success">Antrean</label>
                                                 </a>
+                                                <a href="{{ route('admin.antrean.display', $item->codeLoket) }}">
+                                                    <label class="btn btn-info">Display</label>
+                                                </a>
                                                 <form action="{{ route('admin.loket.destroy', $item->id, $item->codeLoket) }}" class="d-inline" onsubmit="return confirm('Apakah Anda Yakin Menghapus Loket')" method="POST">
                                                     @csrf
                                                     @method('delete')
