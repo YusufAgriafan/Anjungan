@@ -156,20 +156,19 @@
                 <div class="col-md-6">
                     <div class="form-floating">
                         <select id="metode_pembayaran" class="form-control" name="metode_pembayaran">
-                            <option value="" selected hidden disabled>Pilih Metode Pembayaran</option>
-                            <option value="A01">Umum</option>
-                            <option value="A02">Sinarmas</option>
-                            <option value="A03">BRI</option>
-                            <option value="A04">BNI</option>
-                            <option value="A05">Mandiri Inhealth</option>
-                            <option value="A06">PT. Pamapersada Nusantara</option>
-                            <option value="A07">Jasa Raharja</option>
-                            <option value="A08">Owlexa</option>
-                            <option value="A09">Admedika</option>
-                            <option value="A10">Kemenkes</option>
-                            <option value="A11">Micare</option>
-                            <option value="BPJ">BPJS Kesehatan</option>
-                          </select>
+                        <option value="Umum">Umum</option>
+                        <option value="Sinarmas">Sinarmas</option>
+                        <option value="BRI">BRI</option>
+                        <option value="BNI">BNI</option>
+                        <option value="Mandiri Inhealth">Mandiri Inhealth</option>
+                        <option value="PT. Pamapersada Nusantara">PT. Pamapersada Nusantara</option>
+                        <option value="Jasa Raharja">Jasa Raharja</option>
+                        <option value="Owlexa">Owlexa</option>
+                        <option value="Admedika">Admedika</option>
+                        <option value="Kemenkes">Kemenkes</option>
+                        <option value="Micare">Micare</option>
+                        <option value="BPJS Kesehatan">BPJS Kesehatan</option>
+                        </select>
                         <label for="metode_pembayaran">Cara Bayar</label>
                     </div>
                 </div>
