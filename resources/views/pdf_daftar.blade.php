@@ -61,21 +61,6 @@
         .button:hover {
             background-color: #45a049;
         }
-        
-        /* Styling for print */
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            .container, .container * {
-                visibility: visible;
-            }
-            .container {
-                position: absolute;
-                left: 0;
-                top: 0;
-            }
-        }
     </style>
 </head>
 <body>
@@ -91,37 +76,37 @@
             <div class="info-title">BUKTI PENDAFTARAN</div>
             <div class="horizontal-line"></div>
             <div class="form-group">
-                <label class="form-label" for="cetak_nomor_kartu">Nomor Kartu:</label>
-                <input class="form-input" type="text" id="cetak_nomor_kartu" value="1234567890" readonly>
+                <label class="form-label" for="cetak_nomor_kartu">Nomor Rekam Medis:</label>
+                <input class="form-input" type="text" id="cetak_nomor_kartu" value="{{ $no_rkm_medis }}" readonly>
             </div>
             <div class="form-group">
                 <label class="form-label" for="cetak_nama">Nama:</label>
-                <input class="form-input" type="text" id="cetak_nama" value="John Doe" readonly>
+                <input class="form-input" type="text" id="cetak_nama" value="{{ $nm_pasien }}" readonly>
             </div>
             <div class="form-group">
                 <label class="form-label" for="cetak_alamat">Alamat:</label>
-                <input class="form-input" type="text" id="cetak_alamat" value="Jl. Merdeka No. 123" readonly>
+                <input class="form-input" type="text" id="cetak_alamat" value="{{ $alamat }}" readonly>
             </div>
             <div class="horizontal-line"></div>
             <div class="form-group">
                 <label class="form-label" for="cetak_cara_bayar">Cara Bayar:</label>
-                <input class="form-input" type="text" id="cetak_cara_bayar" value="Tunai" readonly>
+                <input class="form-input" type="text" id="cetak_cara_bayar" value="{{ $metode_pembayaran }}" readonly>
             </div>
             <div class="form-group">
                 <label class="form-label" for="cetak_tanggal_kunjungan">Tanggal Kunjungan:</label>
-                <input class="form-input" type="text" id="cetak_tanggal_kunjungan" value="2024-06-30" readonly>
+                <input class="form-input" type="text" id="cetak_tanggal_kunjungan" value="{{ $tanggal_kunjungan }}" readonly>
             </div>
             <div class="form-group">
-                <label class="form-label" for="cetak_klinik">Klinik:</label>
-                <input class="form-input" type="text" id="cetak_klinik" value="Klinik Umum" readonly>
+                <label class="form-label" for="cetak_poli">Poli:</label>
+                <input class="form-input" type="text" id="cetak_poli" value="{{ $kd_poli }}" readonly>
             </div>
             <div class="form-group">
                 <label class="form-label" for="cetak_dokter">Dokter:</label>
-                <input class="form-input" type="text" id="cetak_dokter" value="Dr. Smith" readonly>
-            </div><br>
+                <input class="form-input" type="text" id="cetak_dokter" value="{{ $kd_dokter }}" readonly>
+            </div>
+            <br>
             <p style="text-align: center;">Terima Kasih Atas kepercayaan Anda. Bawalah kartu Berobat anda dan datang 30 menit sebelumnya.</p>
             <p style="text-align: center;">Bawalah surat rujukan atau surat kontrol asli dan tunjukkan pada petugas di Lobby resepsionis.</p>
-            <button class="button info-title style="text-align: center;"" onclick="window.print()">Cetak</button>
         </div>
     </div>
 </body>

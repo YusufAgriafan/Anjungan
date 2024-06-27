@@ -45,7 +45,6 @@ class AdminAntreanController extends Controller
         
     }
 
-
     public function test($codeLoket)
     {
             $antreanNow = Antrean::where('codeLoket', $codeLoket)

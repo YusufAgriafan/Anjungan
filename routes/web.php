@@ -22,7 +22,7 @@ Route::get('/generate-pdf', [AntreanController::class, 'generatePDF'])->name('ge
 
 Route::get('/antrean', [AntreanController::class, 'antrean'])->name('antrean');
 Route::get('/cek-kartu-berobat', [KartuBerobatController::class, 'cekKartuBerobat'])->name('cek.kartu.berobat');
-Route::post('/simpan-pendaftaran', [DaftarController::class, 'simpanPendaftaran'])->name('simpan.pendaftaran');
+Route::post('/simpan', [DaftarController::class, 'simpanData'])->name('simpan.daftar');
 
 Route::get('/form', function () {
     return view('contact');
@@ -40,6 +40,23 @@ Route::get('/generate-pdf', function (Illuminate\Http\Request $request) {
     $pdf->render();
     return $pdf->stream('document.pdf');
 })->name('pdf');
+
+Route::get('/daftar-pdf', function (Illuminate\Http\Request $request) {
+    $no_rkm_medis = $request->input('no_rkm_medis');
+    $nm_pasien = $request->input('nm_pasien');
+    $metode_pembayaran = $request->input('metode_pembayaran');
+    $tanggal_kunjungan = $request->input('tanggal_kunjungan');
+    $kd_poli = $request->input('kd_poli');
+    $kd_dokter = $request->input('kd_dokter');
+    $alamat = $request->input('alamat');
+
+    $dateTime = now()->format('Y-m-d H:i');
+    $pdf = new Dompdf();
+    $pdf->loadHtml(View::make('pdf_daftar', compact('no_rkm_medis', 'nm_pasien', 'dateTime','metode_pembayaran', 'tanggal_kunjungan',  'kd_poli', 'kd_dokter', 'alamat'))->render());
+    $pdf->setPaper('A4', 'portrait');
+    $pdf->render();
+    return $pdf->stream('daftar.pdf');
+})->name('daftar.pdf');
 
 Route::prefix('dashboard')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');

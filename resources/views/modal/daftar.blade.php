@@ -235,27 +235,14 @@
                         <label for="alamat">Alamat Lengkap</label>
                     </div>
                 </div>
-
                 <div class="col-12">
                     <button class="btn btn-primary w-100 py-3" onclick="submitPilihPoliDokter()" type="button">Simpan Pendaftaran</button>
                 </div>
             </div>
         </form>
       </div>
-      <script>
-        function confirmAndPrint(message, number, type) {
-            if (confirm(message)) {
-                var printWindow = window.open(`{{ route('pdf') }}?number=${number}&type=${type}`, '_blank');
-                printWindow.addEventListener('load', function() {
-                    printWindow.print();
-                });
-                return true;
-            } else {
-                return false;
-            }
-        }
-    </script>
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
       <script>
         function submitPilihPoliDokter() {
             if (confirm("Apakah Anda yakin ingin menyimpan pendaftaran ini?")) {
@@ -270,25 +257,33 @@
                 };
 
                 $.ajax({
-                    url: '{{ route("simpan.pendaftaran") }}',
+                    url: '{{ route("simpan.daftar") }}',
                     type: 'POST',
                     data: formData,
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
-                    success: function(response) {
+                    success: function (response) {
                         if (response.success) {
                             alert('Pendaftaran berhasil disimpan');
-                            // Optionally, you can reset the form after successful submission
-                            // $('#myForm')[0].reset();
+                            // Mencetak PDF menggunakan data yang sama
+                            var printWindow = window.open(`{{ route('daftar.pdf') }}?no_rkm_medis=${formData.no_rkm_medis}&nm_pasien=${formData.nm_pasien}&metode_pembayaran=${formData.metode_pembayaran}&tanggal_kunjungan=${formData.tanggal_kunjungan}&kd_poli=${formData.kd_poli}&kd_dokter=${formData.kd_dokter}&alamat=${formData.alamat}`, '_blank');
+                            printWindow.addEventListener('load', function() {
+                                printWindow.print();
+                            });
                         } else {
-                            alert('Terjadi kesalahan saat menyimpan pendaftaran');
+                            alert('Pendaftaran gagal disimpan: ' + response.error);
                         }
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Terjadi kesalahan: ' + error);
                     }
                 });
             }
         }
-      </script>
+
+    </script>
+
 
       <div class="progress">
         <div class="progress-bar" id="progressBar"></div>
