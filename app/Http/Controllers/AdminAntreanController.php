@@ -45,7 +45,6 @@ class AdminAntreanController extends Controller
         
     }
 
-
     public function panggil()
     {
         // Ambil semua data loket

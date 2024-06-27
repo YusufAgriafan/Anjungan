@@ -7,17 +7,41 @@ use Illuminate\Http\Request;
 
 class DaftarController extends Controller
 {
-    public function simpanPendaftaran(Request $request)
+    public function simpanData(Request $request)
     {
-        $data = $request->all();
-        // $request->validate([
-        //     'no_rkm_medis' => 'required',
-        //     'nm_pasien' => 'required',
-        //     // tambahkan aturan validasi lainnya
-        // ]);
+        try {
+            // Validasi input
+            $validatedData = $request->validate([
+                'no_rkm_medis' => 'required|string',
+                'nm_pasien' => 'required|string',
+                'metode_pembayaran' => 'required|string',
+                'tanggal_kunjungan' => 'required|date',
+                'kd_poli' => 'required|string',
+                'kd_dokter' => 'required|string',
+                'alamat' => 'required|string',
+            ]);
 
-        Daftar::create($data);
+            // Simpan data pendaftaran ke database
+            $daftar = Daftar::create($validatedData);
 
-        return response()->json(['success' => true]);
+            if (!$daftar) {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Gagal menyimpan data pendaftaran.'
+                ]);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Pendaftaran berhasil disimpan.',
+                'data' => $daftar,
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Pendaftaran gagal disimpan: ' . $e->getMessage(),
+            ]);
+        }
     }
 }
