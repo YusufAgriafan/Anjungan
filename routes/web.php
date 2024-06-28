@@ -53,7 +53,7 @@ Route::get('/daftar-pdf', function (Illuminate\Http\Request $request) {
     $dateTime = now()->format('Y-m-d H:i');
     $pdf = new Dompdf();
     $pdf->loadHtml(View::make('pdf_daftar', compact('no_rkm_medis', 'nm_pasien', 'dateTime','metode_pembayaran', 'tanggal_kunjungan',  'kd_poli', 'kd_dokter', 'alamat'))->render());
-    $pdf->setPaper('A4', 'portrait');
+    $pdf->setPaper('A6', 'portrait');
     $pdf->render();
     return $pdf->stream('daftar.pdf');
 })->name('daftar.pdf');

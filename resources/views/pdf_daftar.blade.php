@@ -7,59 +7,66 @@
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f0f0f0;
-            padding: 20px;
+            padding: 10px; /* Padding agar muat di A6 */
         }
         .container {
-            max-width: 800px;
             margin: 0 auto;
             background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
             border-radius: 5px;
+            page-break-inside: avoid; /* Hindari pembagian halaman di dalam container */
         }
         .info-box {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         .info-title {
-            font-size: 1.2em;
+            font-size: 20px; /* Ukuran judul disesuaikan */
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             text-align: center;
         }
+
+        .info-daftar {
+            font-size: 15px; /* Ukuran judul disesuaikan */
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
         .horizontal-line {
             border-bottom: 1px solid #ddd;
-            margin: 10px 0;
+            margin: 5px 0;
         }
-        .form-group {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
+        .table-container {
+            display: table;
+            width: 100%;
+        }
+        .table-row {
+            display: table-row;
+        }
+        .table-cell {
+            display: table-cell;
+            padding: 5px 10px;
+            font-size: 10px; /* Ukuran teks dalam tabel */
         }
         .form-label {
-            flex: 1;
             font-weight: bold;
-            margin-right: 10px;
+            text-align: left;
+            padding-right: 10px;
         }
         .form-input {
-            flex: 2;
-            width: 100%;
-            padding: 8px;
-            font-size: 1em;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
+            border-bottom: 1px solid #ccc;
+            font-size: 10px; /* Ukuran input disesuaikan */
+            padding: 2px;
+            width: 100%;
+            background: none;
         }
-        .button:hover {
-            background-color: #45a049;
+        p {
+            font-size: 10px; /* Ukuran paragraf disesuaikan */
+            margin-bottom: 5px; /* Spasi paragraf dikurangi */
+            text-align: left; /* Teks rata kiri dan kanan */
         }
     </style>
 </head>
@@ -67,46 +74,61 @@
     <div class="container">
         <div class="info-box">
             <div class="info-title">RS Islam Aminah Blitar</div>
-            <div style="text-align: center;">Jl. Kenari 54 Plosokerep</div>
-            <div style="text-align: center;">Sananwetan</div>
-            <div style="text-align: center;">6282228815210</div>
+            <div style="text-align: center; font-size: 0.7em;">Jl. Kenari 54 Plosokerep</div>
+            <div style="text-align: center; font-size: 0.7em;">Sananwetan</div>
+            <div style="text-align: center; font-size: 0.7em;">6282228815210</div>
         </div>
         <div class="horizontal-line"></div>
         <div class="info-box">
-            <div class="info-title">BUKTI PENDAFTARAN</div>
+            <div class="info-daftar">BUKTI PENDAFTARAN</div>
             <div class="horizontal-line"></div>
-            <div class="form-group">
-                <label class="form-label" for="cetak_nomor_kartu">Nomor Rekam Medis:</label>
-                <input class="form-input" type="text" id="cetak_nomor_kartu" value="{{ $no_rkm_medis }}" readonly>
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="cetak_nama">Nama:</label>
-                <input class="form-input" type="text" id="cetak_nama" value="{{ $nm_pasien }}" readonly>
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="cetak_alamat">Alamat:</label>
-                <input class="form-input" type="text" id="cetak_alamat" value="{{ $alamat }}" readonly>
+            <div class="table-container">
+                <div class="table-row">
+                    <div class="table-cell form-label">Nomor Rekam Medis:</div>
+                    <div class="table-cell">
+                        <input class="form-input" type="text" value="{{ $no_rkm_medis }}" readonly>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell form-label">Nama         :</div>
+                    <div class="table-cell">
+                        <input class="form-input" type="text" value="{{ $nm_pasien }}" readonly>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell form-label">Alamat       :</div>
+                    <div class="table-cell">
+                        <input class="form-input" type="text" value="{{ $alamat }}" readonly>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell form-label">Cara Bayar   :</div>
+                    <div class="table-cell">
+                        <input class="form-input" type="text" value="{{ $metode_pembayaran }}" readonly>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell form-label">Tanggal Kunjungan:</div>
+                    <div class="table-cell">
+                        <input class="form-input" type="text" value="{{ $tanggal_kunjungan }}" readonly>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell form-label">Poli         :</div>
+                    <div class="table-cell">
+                        <input class="form-input" type="text" value="{{ $kd_poli }}" readonly>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell form-label">Dokter       :</div>
+                    <div class="table-cell">
+                        <input class="form-input" type="text" value="{{ $kd_dokter }}" readonly>
+                    </div>
+                </div>
             </div>
             <div class="horizontal-line"></div>
-            <div class="form-group">
-                <label class="form-label" for="cetak_cara_bayar">Cara Bayar:</label>
-                <input class="form-input" type="text" id="cetak_cara_bayar" value="{{ $metode_pembayaran }}" readonly>
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="cetak_tanggal_kunjungan">Tanggal Kunjungan:</label>
-                <input class="form-input" type="text" id="cetak_tanggal_kunjungan" value="{{ $tanggal_kunjungan }}" readonly>
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="cetak_poli">Poli:</label>
-                <input class="form-input" type="text" id="cetak_poli" value="{{ $kd_poli }}" readonly>
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="cetak_dokter">Dokter:</label>
-                <input class="form-input" type="text" id="cetak_dokter" value="{{ $kd_dokter }}" readonly>
-            </div>
-            <br>
-            <p style="text-align: center;">Terima Kasih Atas kepercayaan Anda. Bawalah kartu Berobat anda dan datang 30 menit sebelumnya.</p>
-            <p style="text-align: center;">Bawalah surat rujukan atau surat kontrol asli dan tunjukkan pada petugas di Lobby resepsionis.</p>
+            <p>Terima Kasih atas kepercayaan Anda. Bawalah kartu berobat Anda dan datang 30 menit sebelumnya.
+            Bawalah surat rujukan atau surat kontrol asli dan tunjukkan pada petugas di Lobby resepsionis.</p>
         </div>
     </div>
 </body>
