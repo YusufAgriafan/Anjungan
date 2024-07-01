@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Antrean;
 use App\Models\Loket;
+use App\Models\Antrean;
 use Illuminate\Http\Request;
+use App\Events\AntreanUpdated;
 use Illuminate\Support\Facades\Auth;
 
 class AdminAntreanController extends Controller
@@ -125,6 +126,8 @@ class AdminAntreanController extends Controller
         $antrean = Antrean::findOrFail($id);
         $antrean->updated_at = now();
         $antrean->save();
+
+        broadcast(new AntreanUpdated('hello world'))->toOthers();
 
         return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean diperbarui.');
     }

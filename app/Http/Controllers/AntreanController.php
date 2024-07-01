@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class AntreanController extends Controller
 {
-    // Menampilkan halaman antrian
     public function index()
     {
         $lastLoketCode = Antrean::where('code', 'LIKE', 'A%')->orderBy('created_at', 'desc')->first();
@@ -27,16 +26,16 @@ class AntreanController extends Controller
             return redirect()->back()->with('error', 'Tipe antrian tidak valid');
         }
 
-        // Buat kode antrian baru berdasarkan tipe
         $lastCode = Antrean::where('code', 'LIKE', "$type%")->orderBy('created_at', 'desc')->first();
         $newNumber = $lastCode ? intval(substr($lastCode->code, 1)) + 1 : 1;
         $newCode = $type . $newNumber;
 
-        // Simpan kode antrian baru ke database
         $antrean = new Antrean();
         $antrean->code = $newCode;
         $antrean->codeLoket = $type;
         $antrean->save();
+
+        // Event::dispatch(new AntreanUpdated($antrean));
 
         return redirect()->route('index')->with('success', 'Kode antrian baru telah dibuat');
     }
