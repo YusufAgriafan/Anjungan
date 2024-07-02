@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Loket;
 use App\Models\Antrean;
+use Illuminate\Http\Request;
 
 class AntreanController extends Controller
 {
-    // Menampilkan halaman antrian
     public function index()
     {
         $lastLoketCode = Antrean::where('code', 'LIKE', 'A%')->orderBy('created_at', 'desc')->first();
@@ -26,16 +26,16 @@ class AntreanController extends Controller
             return redirect()->back()->with('error', 'Tipe antrian tidak valid');
         }
 
-        // Buat kode antrian baru berdasarkan tipe
         $lastCode = Antrean::where('code', 'LIKE', "$type%")->orderBy('created_at', 'desc')->first();
         $newNumber = $lastCode ? intval(substr($lastCode->code, 1)) + 1 : 1;
         $newCode = $type . $newNumber;
 
-        // Simpan kode antrian baru ke database
         $antrean = new Antrean();
         $antrean->code = $newCode;
         $antrean->codeLoket = $type;
         $antrean->save();
+
+        // Event::dispatch(new AntreanUpdated($antrean));
 
         return redirect()->route('index')->with('success', 'Kode antrian baru telah dibuat');
     }
@@ -46,11 +46,33 @@ class AntreanController extends Controller
         // Implementasi untuk generate PDF
     }
 
+    // public function antrean()
+    // {
+    //     $pendingAntreans = Antrean::where('served', false)->orderBy('created_at', 'asc')->take(3)->get();
+    //     return view('antrean', compact('pendingAntreans'));
+    // }
+
     public function antrean()
     {
-        $pendingAntreans = Antrean::where('served', false)->orderBy('created_at', 'asc')->take(3)->get();
+        $lokets = Loket::all();
 
-        return view('antrean', compact('pendingAntreans'));
+        $topAntrean = [];
+        foreach ($lokets as $loket) {
+            $antrean = Antrean::where('codeLoket', $loket->codeLoket)
+                ->where('served', false)
+                ->orderBy('updated_at', 'asc')
+                ->first();
+            $topAntrean[$loket->codeLoket] = $antrean;
+        }
+
+        $allAntrean = Antrean::where('served', false)
+            ->orderBy('updated_at', 'asc')
+            ->get();
+
+        return view('antreanTest', [
+            'topAntrean' => $topAntrean,
+            'allAntrean' => $allAntrean,
+        ]);
     }
 
     public function daftarantrean()

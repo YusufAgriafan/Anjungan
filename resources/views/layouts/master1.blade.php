@@ -50,7 +50,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
                 <a href="index.html" class="navbar-brand">
-                    <img src="main/img/logo.png" alt="Hairnic Logo" class="img-fluid" style="width: 250px; height: auto;">
+                    <img src=" {{ asset('/main/img/logo.png  ') }}" alt="Hairnic Logo" class="img-fluid" style="width: 250px; height: auto;">
                 </a>
                 {{-- <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse">
@@ -88,7 +88,7 @@
             <div class="row g-5">
                 <div class="col-md-6 col-lg-6 wow fadeIn" data-wow-delay="0.3s">
                     <a href="index.html" class="navbar-brand">
-                        <img src="main/img/logo.png" alt="Hairnic Logo" class="img-fluid" style="width: 250px; height: auto;">
+                        <img src=" {{ asset('/main/img/logo.png  ') }}" alt="Hairnic Logo" class="img-fluid" style="width: 250px; height: auto;">
                     </a>
                     <p class="mb-0">Selamat datang di anjungan pasien Rumah Sakit Islam Aminah Kota Blitar. 
                         Kami berkomitmen untuk memberikan pelayanan kesehatan terbaik dengan fasilitas lengkap dan tenaga medis profesional.</p>

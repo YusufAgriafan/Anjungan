@@ -73,6 +73,7 @@ Route::prefix('dashboard')->name('admin.')->middleware('auth')->group(function (
 
     Route::prefix('/antrean')->name('antrean.')->group(function () {
         Route::get('/{codeLoket}', [AdminAntreanController::class, 'index'])->name('index');
+        Route::get('/display/{codeLoket}', [AdminAntreanController::class, 'showTopAntrean'])->name('display');
         
         Route::post('/telat/{id}', [AdminAntreanController::class, 'telat'])->name('telat');
         Route::post('/serve/{id}', [AdminAntreanController::class, 'serve'])->name('serve');

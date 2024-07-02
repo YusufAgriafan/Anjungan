@@ -156,6 +156,20 @@
                 <div class="col-md-6">
                     <div class="form-floating">
                         <select id="metode_pembayaran" class="form-control" name="metode_pembayaran">
+                            <option value="" selected hidden disabled>Pilih Metode Pembayaran</option>
+                            <option value="Umum">Umum</option>
+                            <option value="Sinarmas">Sinarmas</option>
+                            <option value="BRI">BRI</option>
+                            <option value="BNI">BNI</option>
+                            <option value="Mandiri Inhealth">Mandiri Inhealth</option>
+                            <option value="PT. Pamapersada Nusantara">PT. Pamapersada Nusantara</option>
+                            <option value="Jasa Raharja">Jasa Raharja</option>
+                            <option value="Owlexa">Owlexa</option>
+                            <option value="Admedika">Admedika</option>
+                            <option value="Kemenkes">Kemenkes</option>
+                            <option value="Micare">Micare</option>
+                            <option value="BPJS Kesehatan">BPJS Kesehatan</option>
+                          </select>
                         <option value="Umum">Umum</option>
                         <option value="Sinarmas">Sinarmas</option>
                         <option value="BRI">BRI</option>
@@ -184,33 +198,32 @@
                         <select id="kd_poli" class="form-control" name="kd_poli">
                             <option value="" selected hidden disabled>Pilih Poli</option>
                             <option value="IGDK">Unit IGD</option>
-                            <option value="Poli Umum">Poli Umum</option>
-                            <option value="Poli Anak">Poli Anak</option>
-                            <option value="Poli Obgyn">Poli Obgyn</option>
-                            <option value="Poli Bedah">Poli Bedah</option>
-                            <option value="Poli Mata">Poli Mata</option>
-                            <option value="Poli Gigi">Poli Gigi</option>
-                            <option value="Poli Penyakit Dalam">Poli Penyakit Dalam</option>
-                            <option value="Poli Orthopedi">Poli Orthopedi</option>
-                            <option value="Poli Syaraf">Poli Syaraf</option>
-                            <option value="Poli Paru">Poli Paru</option>
-                            <option value="Poli Kulit &amp; Kelamin">Poli Kulit &amp; Kelamin</option>
-                            <option value="Radiologi">Radiologi</option>
-                            <option value="Laboratorium">Laboratorium</option>
-                            <option value="Rehab Medik">Rehab Medik</option>
-                            <option value="Gizi">Gizi</option>
-                            <option value="Mom`s Care">Mom`s Care</option>
-                            <option value="Poli Nyeri">Poli Nyeri</option>
-                            <option value="TeleMedicine">TeleMedicine</option>
-                            <option value="Poli Andrologi">Poli Andrologi</option>
-                            <option value="Rehab Medik">Rehab Medik</option>
-                            <option value="Farmasi">Farmasi</option>
-                            <option value="Home Visite">Home Visite</option>
-                            <option value="Home Care">Home Care</option>
-                            <option value="Poli Jantung">Poli Jantung</option>
-                            <option value="Poli THT">Poli THT</option>
-                            <option value="Poli Neurologi">Poli Neurologi</option>
-
+                            <option value="U0001">Poli Umum</option>
+                            <option value="U0002">Poli Anak</option>
+                            <option value="U0003">Poli Obgyn</option>
+                            <option value="U0004">Poli Bedah</option>
+                            <option value="U0005">Poli Mata</option>
+                            <option value="U0006">Poli Gigi</option>
+                            <option value="U0007">Poli Penyakit Dalam</option>
+                            <option value="U0008">Poli Orthopedi</option>
+                            <option value="U0009">Poli Syaraf</option>
+                            <option value="U0010">Poli Paru</option>
+                            <option value="U0011">Poli Kulit &amp; Kelamin</option>
+                            <option value="U0012">Radiologi</option>
+                            <option value="U0013">Laboratorium</option>
+                            <option value="U0015">Rehab Medik</option>
+                            <option value="U0016">Gizi</option>
+                            <option value="U0017">Mom`s Care</option>
+                            <option value="U0018">Poli Nyeri</option>
+                            <option value="U0019">TeleMedicine</option>
+                            <option value="U0020">Poli Andrologi</option>
+                            <option value="U0021">Rehab Medik</option>
+                            <option value="U0022">Farmasi</option>
+                            <option value="U0023">Home Visite</option>
+                            <option value="U0024">Home Care</option>
+                            <option value="U0025">Poli Jantung</option>
+                            <option value="U0026">Poli THT</option>
+                            <option value="U0027">Poli Neurologi</option>
                           </select>
                         <label for="kd_poli">Pilih Poli</label>
                     </div>
