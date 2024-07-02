@@ -2,34 +2,30 @@
 
 namespace App\Events;
 
-use App\Models\Antrean;
 use Illuminate\Broadcasting\Channel;
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class AntreanUpdated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $antrean;
+    public $message;
 
-    public function __construct($antrean)
+    public function __construct($message)
     {
-      $this->antrean = $antrean;
+        $this->message = $message;
     }
 
     public function broadcastOn()
     {
-        return ['antrean-channel'];
+        return new Channel('antrean-channel');
     }
 
-    // public function broadcastAs()
-    // {
-    //     return 'antrean-updated';
-    // }
-    
+    public function broadcastAs()
+    {
+        return 'antrean-updated';
+    }
 }

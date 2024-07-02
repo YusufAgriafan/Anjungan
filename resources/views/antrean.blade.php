@@ -14,7 +14,7 @@
 
         var channel = pusher.subscribe('antrean-channel');
         channel.bind('antrean-updated', function(data) {
-        alert(JSON.stringify(data));
+            alert(data.message);
         });
     </script>
 

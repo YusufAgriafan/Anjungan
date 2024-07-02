@@ -127,7 +127,8 @@ class AdminAntreanController extends Controller
         $antrean->updated_at = now();
         $antrean->save();
 
-        broadcast(new AntreanUpdated('hello world'))->toOthers();
+        // broadcast(new AntreanUpdated('hello world'));
+        event(new \App\Events\AntreanUpdated('This is testing data'));
 
         return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean diperbarui.');
     }
