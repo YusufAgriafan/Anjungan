@@ -4,17 +4,27 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script>
-
-        // Enable pusher logging - don't include this in production
+        // Enable Pusher logging - don't include this in production
         Pusher.logToConsole = true;
 
-        var pusher = new Pusher('12defbe1e8004a6b95e9', {
-        cluster: 'ap1'
+        var pusher = new Pusher('{{ env("PUSHER_APP_KEY") }}', {
+            cluster: 'ap1',
+            encrypted: true
         });
 
         var channel = pusher.subscribe('antrean-channel');
-        channel.bind('antrean-updated', function(data) {
+        channel.bind('events.AntreanUpdated', function(data) {
             alert(data.message);
+        });
+    </script>
+    
+
+    <script>
+    Echo.channel('antrean-channel')
+        .listen('AntreanUpdated', (e) => {
+            // Perbarui daftar antrean secara real-time
+            console.log(e.antrean);
+            // Perbarui daftar antrean di sini
         });
     </script>
 

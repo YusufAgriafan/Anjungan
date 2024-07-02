@@ -7,6 +7,7 @@ use App\Models\Antrean;
 use Illuminate\Http\Request;
 use App\Events\AntreanUpdated;
 use Illuminate\Support\Facades\Auth;
+use Pusher;
 
 class AdminAntreanController extends Controller
 {
@@ -121,16 +122,60 @@ class AdminAntreanController extends Controller
         ]);
     }    
 
+    // public function telat($id)
+    // {
+    //     $antrean = Antrean::findOrFail($id);
+    //     $antrean->updated_at = now();
+    //     $antrean->save();
+
+    //     broadcast(new AntreanUpdated('hello world'))->toOthers();
+
+    //     return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean diperbarui.');
+    // }
+
+    // public function telat($id)
+    // {
+    //     // event(new TestEvent('hello'));
+    //     $antrean = array(
+    //         'success'=>true,
+    //         'message'=>'this is a test',
+    //     );
+
+    //     $antrean = array(
+    //         'cluster' => 'ap1',
+    //         'useTLS' => true
+    //     );
+
+    //     $pusher = new Pusher\Pusher(
+    //         env('PUSHER_APP_KEY'),
+    //         env('PUSHER_APP_SECRET'),
+    //         env('PUSHER_APP_ID'),
+    //     );
+        
+    //     $data['message'] = 'hello world. This is new message';
+    //     $pusher->trigger('admin.antrean.index', 'events.AntreanUpdated', $data);
+    // }
+
     public function telat($id)
     {
         $antrean = Antrean::findOrFail($id);
+        
         $antrean->updated_at = now();
         $antrean->save();
 
-        // broadcast(new AntreanUpdated('hello world'));
-        event(new \App\Events\AntreanUpdated('This is testing data'));
-
-        return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean diperbarui.');
+        $pusher = new \Pusher\Pusher(
+        env('PUSHER_APP_KEY'),
+        env('PUSHER_APP_SECRET'),
+        env('PUSHER_APP_ID'),
+            [
+            'cluster' => 'ap1',
+            'useTLS' => true
+            ]
+        );
+         $data['message'] = 'hello world. This is new message';
+         $pusher->trigger('antrean-channel', 'events.AntreanUpdated', $data);
+        
+         return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean diperbarui.');
     }
 
     public function destroy($id)

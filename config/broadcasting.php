@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('BROADCAST_CONNECTION', 'null'),
+    // 'default' => env('BROADCAST_CONNECTION', 'null'),
 
     /*
     |--------------------------------------------------------------------------
@@ -27,6 +27,8 @@ return [
     | each available type of connection are provided inside this array.
     |
     */
+
+    'default' => env('BROADCAST_CONNECTION', 'pusher'),
 
     'connections' => [
 

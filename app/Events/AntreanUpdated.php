@@ -26,6 +26,11 @@ class AntreanUpdated implements ShouldBroadcast
 
     public function broadcastAs()
     {
-        return 'antrean-updated';
+        return 'events.AntreanUpdated';
+    }
+
+    public function broadcastWith()
+    {
+        return ['message' => $this->message];
     }
 }
