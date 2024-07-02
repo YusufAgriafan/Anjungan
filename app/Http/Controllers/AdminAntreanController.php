@@ -11,6 +11,14 @@ use Pusher;
 
 class AdminAntreanController extends Controller
 {
+    public function resetAntrean()
+    {
+        // Hapus semua data antrian
+        Antrean::truncate();
+
+        return redirect()->route('admin.index')->with('success', 'Antrian berhasil direset.');
+    }
+
     public function daftarantrean()
     {
         $antrean = Antrean::latest()->get();;

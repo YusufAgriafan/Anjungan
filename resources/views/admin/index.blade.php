@@ -8,6 +8,8 @@
         <ul>
             <li><a href="#loket">Antrian Loket</a></li>
             <li><a href="#cs">Antrian CS</a></li>
+            
+
         </ul>
     </div>
     <div class="container">

@@ -35,8 +35,6 @@ class AntreanController extends Controller
         $antrean->codeLoket = $type;
         $antrean->save();
 
-        // Event::dispatch(new AntreanUpdated($antrean));
-
         return redirect()->route('index')->with('success', 'Kode antrian baru telah dibuat');
     }
 

@@ -12,6 +12,8 @@ use App\Http\Controllers\TerlayaniController;
 use App\Http\Controllers\AdminAntreanController;
 use App\Http\Controllers\KartuBerobatController;
 
+Route::get('/reset-antrean', [AdminAntreanController::class, 'resetAntrean'])->name('reset.antrean');
+
 Route::get('/', [AntreanController::class, 'index'])->name('index');
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'auth'])->name('auth');
@@ -74,12 +76,10 @@ Route::prefix('dashboard')->name('admin.')->middleware('auth')->group(function (
     Route::prefix('/antrean')->name('antrean.')->group(function () {
         Route::get('/{codeLoket}', [AdminAntreanController::class, 'index'])->name('index');
         Route::get('/display/{codeLoket}', [AdminAntreanController::class, 'showTopAntrean'])->name('display');
-        
         Route::post('/telat/{id}', [AdminAntreanController::class, 'telat'])->name('telat');
         Route::post('/serve/{id}', [AdminAntreanController::class, 'serve'])->name('serve');
         Route::put('/admin/antrean/{id}/ubah/{codeLoket}', [AdminAntreanController::class, 'ubah'])->name('ubah');
         Route::delete('/{id}', [AdminAntreanController::class, 'destroy'])->name('destroy');
-
     });
 
     Route::get('/panggil', [AdminAntreanController::class, 'panggil'])->name('panggil');
