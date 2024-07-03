@@ -147,85 +147,22 @@ class AdminAntreanController extends Controller
 
     public function panggil()
     {
-        // Ambil semua data loket
         $lokets = Loket::all();
-    
-        // Inisialisasi array untuk menampung antrean berdasarkan loket
         $antreansByLoket = [];
     
-        // Loop untuk setiap loket
         foreach ($lokets as $loket) {
-            // Ambil antrean yang belum dilayani (served = 0) berdasarkan codeLoket
             $antreans = Antrean::where('served', 0)
                 ->where('codeLoket', $loket->codeLoket)
                 ->orderBy('updated_at', 'asc')
                 ->get();
-    
-            // Tambahkan ke array $antreansByLoket dengan key berdasarkan codeLoket
             $antreansByLoket[$loket->codeLoket] = $antreans;
         }
     
         return view('admin.antrean.panggil', [
-            'antreansByLoket' => $antreansByLoket, // Mengirimkan array antrean berdasarkan loket ke view
-            'lokets' => $lokets, // Mengirimkan daftar loket ke view
+            'antreansByLoket' => $antreansByLoket,
+            'lokets' => $lokets, 
         ]);
     }    
-
-    // public function telat($id)
-    // {
-    //     $antrean = Antrean::findOrFail($id);
-    //     $antrean->updated_at = now();
-    //     $antrean->save();
-
-    //     broadcast(new AntreanUpdated('hello world'))->toOthers();
-
-    //     return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean diperbarui.');
-    // }
-
-    // public function telat($id)
-    // {
-    //     // event(new TestEvent('hello'));
-    //     $antrean = array(
-    //         'success'=>true,
-    //         'message'=>'this is a test',
-    //     );
-
-    //     $antrean = array(
-    //         'cluster' => 'ap1',
-    //         'useTLS' => true
-    //     );
-
-    //     $pusher = new Pusher\Pusher(
-    //         env('PUSHER_APP_KEY'),
-    //         env('PUSHER_APP_SECRET'),
-    //         env('PUSHER_APP_ID'),
-    //     );
-        
-    //     $data['message'] = 'hello world. This is new message';
-    //     $pusher->trigger('admin.antrean.index', 'events.AntreanUpdated', $data);
-    // }
-
-    // public function telat($id)
-    // {
-    //     $antrean = Antrean::findOrFail($id);
-        
-    //     $antrean->updated_at = now();
-    //     $antrean->save();
-
-    //     $pusher = new \Pusher\Pusher(
-    //     env('PUSHER_APP_KEY'),
-    //     env('PUSHER_APP_SECRET'),
-    //     env('PUSHER_APP_ID'),
-    //         [
-    //         'cluster' => 'ap1',
-    //         'useTLS' => true
-    //         ]
-    //     );
-    //      $data['message'] = 'hello world. This is new message';
-    //      $pusher->trigger('antrean-channel', 'events.AntreanUpdated', $data);
-        
-    //      return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean diperbarui.');
-    // }
 
     public function telat($id)
     {
@@ -244,13 +181,7 @@ class AdminAntreanController extends Controller
             ]
         );
 
-        $data = [
-            'id' => $antrean->id,
-            'code' => $antrean->code,
-            'codeLoket' => $antrean->codeLoket,
-            'updated_at' => $antrean->updated_at->toDateTimeString()
-        ];
-        
+        $data['message'] = 'Data Diperbarui';
         $pusher->trigger('antrean-channel', 'events.AntreanUpdated', $data);
         
         return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean diperbarui.');
@@ -263,6 +194,19 @@ class AdminAntreanController extends Controller
         $codeLoket = $antrean->codeLoket;
         $antrean->delete();
 
+        $pusher = new \Pusher\Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            [
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'useTLS' => true
+            ]
+        );
+
+        $data['message'] = 'Data Diperbarui';
+        $pusher->trigger('antrean-channel', 'events.AntreanUpdated', $data);
+
         return redirect()->route('admin.antrean.index', $codeLoket)->with('success', 'Antrean berhasil dihapus.');
     }
 
@@ -273,6 +217,19 @@ class AdminAntreanController extends Controller
         $antrean->updated_at = now();
         $antrean->save();
 
+        $pusher = new \Pusher\Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            [
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'useTLS' => true
+            ]
+        );
+
+        $data['message'] = 'Data Diperbarui';
+        $pusher->trigger('antrean-channel', 'events.AntreanUpdated', $data);
+
         return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean telah dilayani.');
     }
 
@@ -282,6 +239,19 @@ class AdminAntreanController extends Controller
 
     $antrean->codeLoket = $codeLoket;
     $antrean->save();
+
+    $pusher = new \Pusher\Pusher(
+        env('PUSHER_APP_KEY'),
+        env('PUSHER_APP_SECRET'),
+        env('PUSHER_APP_ID'),
+        [
+            'cluster' => env('PUSHER_APP_CLUSTER'),
+            'useTLS' => true
+        ]
+    );
+
+    $data['message'] = 'Data Diperbarui';
+    $pusher->trigger('antrean-channel', 'events.AntreanUpdated', $data);
 
     return redirect()->route('admin.antrean.index', $codeLoket)->with('success', 'Antrean diperbarui.');
 }
