@@ -35,10 +35,24 @@ class AntreanController extends Controller
         $antrean->codeLoket = $type;
         $antrean->save();
 
+        $pusher = new \Pusher\Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            [
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'useTLS' => true
+            ]
+        );
+
+        $data['message'] = 'Data Diperbarui';
+        $pusher->trigger('antrean-channel', 'events.AntreanUpdated', $data);
+
+        // Event::dispatch(new AntreanUpdated($antrean));
+
         return redirect()->route('index')->with('success', 'Kode antrian baru telah dibuat');
     }
 
-    // Metode untuk generate PDF (opsional)
     public function generatePDF()
     {
         // Implementasi untuk generate PDF

@@ -30,6 +30,8 @@ Route::get('/form', function () {
     return view('contact');
 });
 
+Route::get('/update-antrean/{codeLoket}', [AdminAntreanController::class, 'updateAntrean'])->name('update.antrean');
+
 Route::get('/daftar', [MainController::class, 'daftar'])->name('daftar');
 
 Route::get('/generate-pdf', function (Illuminate\Http\Request $request) {
