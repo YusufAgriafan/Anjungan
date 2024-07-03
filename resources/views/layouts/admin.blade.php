@@ -29,6 +29,11 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('/admin/css/style.css ') }}" rel="stylesheet">
+    <script>
+        function confirmReset() {
+            return confirm('Apakah Anda yakin ingin mereset semua antrian? Tindakan ini tidak dapat dibatalkan.');
+        }
+    </script>
 </head>
 
 <body>
@@ -63,7 +68,9 @@
                     <a href="{{ route('admin.panggil') }}" class="nav-item nav-link @yield('admin_panggil')"><i class="fa fa-volume-up me-2"></i>Panggil</a>
                     <a href="{{ route('admin.serve.index') }}" class="nav-item nav-link @yield('admin_serve')"><i class="fa fa-table me-2"></i>Terlayani</a>
                     <a href="{{ route('logout') }}" class="nav-item nav-link" id="logout-link"><i class="fa fa-chart-bar me-2"></i>Log Out</a>
-                    <a href="{{ route('reset.antrean') }}" class="nav-item nav-link"><i class="fa fa-trash me-2"></i>Reset Antrian</a>
+                    <a href="{{ route('reset.antrean') }}" class="nav-item nav-link" onclick="return confirmReset()">
+                        <i class="fa fa-trash me-2"></i>Reset Antrian
+                    </a>
                     </script>
                 </div>
             </nav>
