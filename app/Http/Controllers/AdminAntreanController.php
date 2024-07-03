@@ -74,10 +74,6 @@ class AdminAntreanController extends Controller
             ->orderBy('updated_at', 'asc')
             ->first();
 
-        // $allAntrean = Antrean::where('served', false)
-        //     ->orderBy('updated_at', 'asc')
-        //     ->get();
-
         $lokets = Loket::all();
 
         $topAntrean = [];
@@ -94,6 +90,59 @@ class AdminAntreanController extends Controller
             'topAntrean' => $topAntrean,
             'codeLoket' => $codeLoket,
         ]);
+    }
+
+    public function updateAntrean($codeLoket)
+    {
+        $antreanNow = Antrean::where('codeLoket', $codeLoket)
+            ->where('served', false)
+            ->orderBy('updated_at', 'asc')
+            ->first();
+
+        $lokets = Loket::all();
+
+        $topAntrean = [];
+        foreach ($lokets as $loket) {
+            $antrean = Antrean::where('codeLoket', $loket->codeLoket)
+                ->where('served', false)
+                ->orderBy('updated_at', 'asc')
+                ->first();
+            $topAntrean[$loket->codeLoket] = $antrean;
+        }
+
+        // Asumsikan view partial 'antrean_partial' hanya berisi konten untuk elemen #read
+        return view('antrean_partial', [
+            'antreanNow' => $antreanNow,
+            'topAntrean' => $topAntrean,
+            'codeLoket' => $codeLoket,
+        ]);
+    }
+
+    public function getUpdatedAntrean($codeLoket)
+    {
+        $antreanNow = Antrean::where('codeLoket', $codeLoket)
+            ->where('served', false)
+            ->orderBy('updated_at', 'asc')
+            ->first();
+
+        $lokets = Loket::all();
+
+        $topAntrean = [];
+        foreach ($lokets as $loket) {
+            $antrean = Antrean::where('codeLoket', $loket->codeLoket)
+                ->where('served', false)
+                ->orderBy('updated_at', 'asc')
+                ->first();
+            $topAntrean[$loket->codeLoket] = $antrean;
+        }
+
+        $htmlContent = view('antrean', [
+            'antreanNow' => $antreanNow,
+            'topAntrean' => $topAntrean,
+            'codeLoket' => $codeLoket,
+        ])->render();
+
+        return response()->json(['htmlContent' => $htmlContent]);
     }
 
     public function panggil()
@@ -156,6 +205,28 @@ class AdminAntreanController extends Controller
     //     $pusher->trigger('admin.antrean.index', 'events.AntreanUpdated', $data);
     // }
 
+    // public function telat($id)
+    // {
+    //     $antrean = Antrean::findOrFail($id);
+        
+    //     $antrean->updated_at = now();
+    //     $antrean->save();
+
+    //     $pusher = new \Pusher\Pusher(
+    //     env('PUSHER_APP_KEY'),
+    //     env('PUSHER_APP_SECRET'),
+    //     env('PUSHER_APP_ID'),
+    //         [
+    //         'cluster' => 'ap1',
+    //         'useTLS' => true
+    //         ]
+    //     );
+    //      $data['message'] = 'hello world. This is new message';
+    //      $pusher->trigger('antrean-channel', 'events.AntreanUpdated', $data);
+        
+    //      return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean diperbarui.');
+    // }
+
     public function telat($id)
     {
         $antrean = Antrean::findOrFail($id);
@@ -164,19 +235,27 @@ class AdminAntreanController extends Controller
         $antrean->save();
 
         $pusher = new \Pusher\Pusher(
-        env('PUSHER_APP_KEY'),
-        env('PUSHER_APP_SECRET'),
-        env('PUSHER_APP_ID'),
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
             [
-            'cluster' => 'ap1',
-            'useTLS' => true
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'useTLS' => true
             ]
         );
-         $data['message'] = 'hello world. This is new message';
-         $pusher->trigger('antrean-channel', 'events.AntreanUpdated', $data);
+
+        $data = [
+            'id' => $antrean->id,
+            'code' => $antrean->code,
+            'codeLoket' => $antrean->codeLoket,
+            'updated_at' => $antrean->updated_at->toDateTimeString()
+        ];
         
-         return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean diperbarui.');
+        $pusher->trigger('antrean-channel', 'events.AntreanUpdated', $data);
+        
+        return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean diperbarui.');
     }
+
 
     public function destroy($id)
     {
