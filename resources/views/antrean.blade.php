@@ -17,11 +17,14 @@
                         <iframe width="100%" height="402" src="https://www.youtube.com/embed/0RY8FqWRNP4?playlist=0RY8FqWRNP4&loop=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
-            @include('antrean_partial', [
+                <div id="read">
+                    @include('antrean_partial', [
                     'antreanNow' => $antreanNow,
                     'topAntrean' => $topAntrean,
-                    'codeLoket' => $codeLoket = 'A',
-            ])
+                    'codeLoket' => $codeLoket
+                    ])
+        
+                </div>
         </div>
 
         <div class="row">
@@ -70,8 +73,6 @@
             });
         }
     </script>
-
-    
 
 
     <script>
