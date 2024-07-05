@@ -39,11 +39,11 @@
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        {{-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
-        </div>
+        </div> --}}
         <!-- Spinner End -->
 
 
@@ -67,10 +67,10 @@
                     <a href="{{ route('admin.loket.index') }}" class="nav-item nav-link @yield('admin_loket')"><i class="fa fa-users me-2"></i>Loket</a>
                     <a href="{{ route('admin.panggil') }}" class="nav-item nav-link @yield('admin_panggil')"><i class="fa fa-volume-up me-2"></i>Panggil</a>
                     <a href="{{ route('admin.serve.index') }}" class="nav-item nav-link @yield('admin_serve')"><i class="fa fa-table me-2"></i>Terlayani</a>
-                    <a href="{{ route('logout') }}" class="nav-item nav-link" id="logout-link"><i class="fa fa-chart-bar me-2"></i>Log Out</a>
                     <a href="{{ route('reset.antrean') }}" class="nav-item nav-link" onclick="return confirmReset()">
                         <i class="fa fa-trash me-2"></i>Reset Antrian
                     </a>
+                    <a href="{{ route('logout') }}" class="nav-item nav-link" id="logout-link"><i class="fa fa-chart-bar me-2"></i>Log Out</a>
                     </script>
                 </div>
             </nav>

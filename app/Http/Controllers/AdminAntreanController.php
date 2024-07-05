@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Pusher;
 use App\Models\Loket;
 use App\Models\Antrean;
 use Illuminate\Http\Request;
 use App\Events\AntreanUpdated;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use Pusher;
 
 class AdminAntreanController extends Controller
 {
@@ -35,6 +36,7 @@ class AdminAntreanController extends Controller
                 ->get();
                 return view('admin.antrean.index', [
                     'antrean' => $antrean,
+                    'codeLoket' => $codeLoket
                 ]);
         } else {
             $allAntrean = Antrean::where('served', 0)
@@ -52,6 +54,40 @@ class AdminAntreanController extends Controller
                 'codeLoket' => $codeLoket,
             ]);
         }
+        
+    }
+
+    public function updateDaftarAntrean($codeLoket)
+    {
+        $antrean = Antrean::where('codeLoket', $codeLoket)
+        ->where('served', 0)
+        ->orderBy('updated_at', 'asc')
+        ->get();
+
+        // Log::info('Antrean Data:', ['antrean' => $antrean]);
+        return view('admin.antrean.index_partial', [
+            'antrean' => $antrean,
+            'codeLoket' => $codeLoket
+        ]);
+        
+    }
+
+    public function updateDaftarAntrean2($codeLoket)
+    {
+        $allAntrean = Antrean::where('served', 0)
+            ->orderBy('updated_at', 'asc')
+            ->get();
+
+        $filteredAntrean = Antrean::where('codeLoket', $codeLoket)
+            ->where('served', 0)
+            ->orderBy('updated_at', 'asc')
+            ->get();
+
+        return view('admin.antrean.tambahan_partial', [
+            'allAntrean' => $allAntrean,
+            'filteredAntrean' => $filteredAntrean,
+            'codeLoket' => $codeLoket,
+        ]);
         
     }
 
@@ -124,33 +160,6 @@ class AdminAntreanController extends Controller
             'topAntrean' => $topAntrean,
             'codeLoket' => $codeLoket,
         ]);
-    }
-
-    public function getUpdatedAntrean($codeLoket)
-    {
-        $antreanNow = Antrean::where('codeLoket', $codeLoket)
-            ->where('served', false)
-            ->orderBy('updated_at', 'asc')
-            ->first();
-
-        $lokets = Loket::all();
-
-        $topAntrean = [];
-        foreach ($lokets as $loket) {
-            $antrean = Antrean::where('codeLoket', $loket->codeLoket)
-                ->where('served', false)
-                ->orderBy('updated_at', 'asc')
-                ->first();
-            $topAntrean[$loket->codeLoket] = $antrean;
-        }
-
-        $htmlContent = view('antrean', [
-            'antreanNow' => $antreanNow,
-            'topAntrean' => $topAntrean,
-            'codeLoket' => $codeLoket,
-        ])->render();
-
-        return response()->json(['htmlContent' => $htmlContent]);
     }
 
     public function panggil()

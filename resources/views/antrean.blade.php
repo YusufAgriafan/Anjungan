@@ -3,35 +3,29 @@
 @section('content')
     <div class="abt-section mb-150">
         <div class="container">
-            <!-- <div class="row">
-                <div class="col-lg-12 col-md-6 mb-2">
-                        <div class="feature-item position-relative bg-primary text-center mb-2">
-                            <h5 id="currentDate" class="text-white mb-2"></h5>
-                            <h5 id="currentTime" class="text-white mb-2"></h5>
-                        </div>
-                </div>
-            </div>   -->
             <div class="row">
                 <div class="col-lg-7 col-md-6 mb-2">
                     <div class="abt-bg">
                         <iframe width="100%" height="402" src="https://www.youtube.com/embed/0RY8FqWRNP4?playlist=0RY8FqWRNP4&loop=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
-                <div id="read">
+                <div id="read" class="col-lg-5 col-md-6 mb-2">
                     @include('antrean_partial', [
+                        'antreanNow' => $antreanNow,
+                        'topAntrean' => $topAntrean,
+                        'codeLoket' => $codeLoket
+                    ])
+                </div>
+            </div>
+            <div id="read" class="row" >
+                @include('antrean_partial2', [
                     'antreanNow' => $antreanNow,
                     'topAntrean' => $topAntrean,
                     'codeLoket' => $codeLoket
-                    ])
-        
-                </div>
-        </div>
-
-        <div class="row">
-
+                ])
+            </div>
         </div>
     </div>
-</div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
