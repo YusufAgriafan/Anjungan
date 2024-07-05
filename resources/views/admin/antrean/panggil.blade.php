@@ -16,55 +16,12 @@
                     </div>
                 </div>
             </div>
-
-            @foreach($lokets as $loket)
-                <div class="col-lg-6 mt-4">
-                    <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">Tabel Loket {{ $loket->codeLoket }}</h6>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Loket</th>
-                                        <th scope="col">Tanggal</th>
-                                        <th scope="col">Waktu</th>
-                                        <th scope="col">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{-- Isi tabel antrian sesuai dengan loket --}}
-                                    @if(isset($antreansByLoket[$loket->codeLoket]))
-                                        @foreach($antreansByLoket[$loket->codeLoket] as $antrean)
-                                            <tr>
-                                                <td>{{ $antrean->code }}</td>
-                                                <td>{{ $antrean->updated_at->format('Y-m-d') }}</td>
-                                                <td>{{ $antrean->updated_at->format('H:i:s') }}</td>
-                                                <td>
-                                                    <button class="btn btn-success panggil-btn" data-code="{{ $antrean->code }}">Panggil</button>
-                                                    <button class="btn btn-warning" onclick="event.preventDefault(); if(confirm('Apakah benar telat?')) { document.getElementById('telat-form-{{ $antrean->id }}').submit(); }">Telat</button>
-                                                    <form id="telat-form-{{ $antrean->id }}" action="{{ route('admin.antrean.telat', $antrean->id) }}" method="POST" style="display: none;">
-                                                        @csrf
-                                                    </form>
-                                                    <form action="{{ route('admin.antrean.destroy', $antrean->id) }}" class="d-inline" onsubmit="return confirm('Apakah kamu yakin menghapus antrean ini?')" method="POST">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button type="submit" class="btn btn-danger border-0">Hapus</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @else
-                                        <tr>
-                                            <td colspan="4" class="text-center">Belum ada antrean untuk loket {{ $loket->codeLoket }}</td>
-                                        </tr>
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-
+            <div id="antrean">
+                @include('admin.antrean.panggil_partial', [
+                        'antreansByLoket' => $antreansByLoket,
+                        'lokets' => $lokets, 
+                        ])
+            </div>            
         </div>
     </div>
     <!-- Queue Counter End -->
@@ -82,6 +39,43 @@
             margin-bottom: 20px; /* Jarak bawah dari elemen sebelumnya */
         }
     </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+
+    <script>
+
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('{{ env("PUSHER_APP_KEY") }}', {
+            cluster: 'ap1',
+            encrypted: true
+        });
+
+        var channel = pusher.subscribe('antrean-channel');
+        channel.bind('events.AntreanUpdated', function(data) {
+            read();
+        });
+
+        function read() {
+            $.get("{{ url('update-panggil') }}", function(data, status) {
+                // console.log('Data received:', data);
+                $("#antrean").html(data);
+            });
+        }
+
+    </script>
 
     <!-- Script untuk Tanggal dan Waktu Saat Ini -->
     <script>

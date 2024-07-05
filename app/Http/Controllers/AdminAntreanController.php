@@ -14,10 +14,9 @@ class AdminAntreanController extends Controller
 {
     public function resetAntrean()
     {
-        // Hapus semua data antrian
         Antrean::truncate();
 
-        return redirect()->route('admin.index')->with('success', 'Antrian berhasil direset.');
+        return redirect()->route('admin.antrean.index')->with('success', 'Antrian berhasil direset.');
     }
 
     public function daftarantrean()
@@ -179,7 +178,26 @@ class AdminAntreanController extends Controller
             'antreansByLoket' => $antreansByLoket,
             'lokets' => $lokets, 
         ]);
-    }    
+    }
+    
+    public function updatePanggil()
+    {
+        $lokets = Loket::all();
+        $antreansByLoket = [];
+    
+        foreach ($lokets as $loket) {
+            $antreans = Antrean::where('served', 0)
+                ->where('codeLoket', $loket->codeLoket)
+                ->orderBy('updated_at', 'asc')
+                ->get();
+            $antreansByLoket[$loket->codeLoket] = $antreans;
+        }
+    
+        return view('admin.antrean.panggil_partial', [
+            'antreansByLoket' => $antreansByLoket,
+            'lokets' => $lokets, 
+        ]);
+    } 
 
     public function telat($id)
     {

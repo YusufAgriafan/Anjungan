@@ -33,6 +33,7 @@ Route::get('/form', function () {
 Route::get('/update-antrean/{codeLoket}', [AdminAntreanController::class, 'updateAntrean'])->name('update.antrean');
 Route::get('/update-daftarAntrean/{codeLoket}', [AdminAntreanController::class, 'updateDaftarAntrean'])->name('update.daftar.antrean');
 Route::get('/update-daftarAntrean2/{codeLoket}', [AdminAntreanController::class, 'updateDaftarAntrean2'])->name('update.daftar.antrean2');
+Route::get('/update-panggil', [AdminAntreanController::class, 'updatePanggil'])->name('update.panggil');
 
 Route::get('/daftar', [MainController::class, 'daftar'])->name('daftar');
 
