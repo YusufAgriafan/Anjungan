@@ -1,6 +1,9 @@
-@foreach($lokets as $loket)
+@foreach($lokets->chunk(2) as $chunkedLokets)
+    <div class="container-fluid pt-4 px-8">
+        <div class="row g-4">
+            @foreach($chunkedLokets as $loket)
                 <div class="col-lg-6 mt-4">
-                    <div class="bg-light rounded h-100 p-4">
+                    <div class="bg-light rounded p-4">
                         <h6 class="mb-4">Tabel Loket {{ $loket->codeLoket }}</h6>
                         <div class="table-responsive">
                             <table class="table">
@@ -21,15 +24,15 @@
                                                 <td>{{ $antrean->updated_at->format('Y-m-d') }}</td>
                                                 <td>{{ $antrean->updated_at->format('H:i:s') }}</td>
                                                 <td>
-                                                    <button class="btn btn-success panggil-btn" data-code="{{ $antrean->code }}">Panggil</button>
-                                                    <button class="btn btn-warning" onclick="event.preventDefault(); if(confirm('Apakah benar telat?')) { document.getElementById('telat-form-{{ $antrean->id }}').submit(); }">Telat</button>
+                                                    <button class="btn btn-success btn-sm panggil-btn" data-code="{{ $antrean->code }}">Panggil</button>
+                                                    <button class="btn btn-warning btn-sm" onclick="event.preventDefault(); if(confirm('Apakah benar telat?')) { document.getElementById('telat-form-{{ $antrean->id }}').submit(); }">Telat</button>
                                                     <form id="telat-form-{{ $antrean->id }}" action="{{ route('admin.antrean.telat', $antrean->id) }}" method="POST" style="display: none;">
                                                         @csrf
                                                     </form>
                                                     <form action="{{ route('admin.antrean.destroy', $antrean->id) }}" class="d-inline" onsubmit="return confirm('Apakah kamu yakin menghapus antrean ini?')" method="POST">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-danger border-0">Hapus</button>
+                                                        <button type="submit" class="btn btn-danger btn-sm border-0">Hapus</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -45,3 +48,6 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+    </div>
+@endforeach

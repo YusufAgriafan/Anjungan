@@ -16,6 +16,19 @@ class AdminAntreanController extends Controller
     {
         Antrean::truncate();
 
+        $pusher = new \Pusher\Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            [
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'useTLS' => true
+            ]
+        );
+
+        $data['message'] = 'Data Diperbarui';
+        $pusher->trigger('antrean-channel', 'events.AntreanUpdated', $data);
+
         return redirect()->route('admin.antrean.index')->with('success', 'Antrian berhasil direset.');
     }
 

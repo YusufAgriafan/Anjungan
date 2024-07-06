@@ -6,7 +6,6 @@
     <!-- Queue Counter Start -->
     <div class="container-fluid pt-2 px-2">
         <div class="row g-4">
-
             <div class="col-lg-12">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Waktu dan Tanggal Saat Ini</h6>
@@ -15,14 +14,14 @@
                         <p id="currentTime"></p>
                     </div>
                 </div>
-            </div>
-            <div id="antrean">
-                @include('admin.antrean.panggil_partial', [
-                        'antreansByLoket' => $antreansByLoket,
-                        'lokets' => $lokets, 
-                        ])
             </div>            
         </div>
+    </div>
+    <div id="antrean">
+        @include('admin.antrean.panggil_partial', [
+                'antreansByLoket' => $antreansByLoket,
+                'lokets' => $lokets, 
+                ])
     </div>
     <!-- Queue Counter End -->
 
