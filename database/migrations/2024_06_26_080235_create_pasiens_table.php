@@ -11,6 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Schema::create('pasiens', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('no_rkm_medis')->unique();
+        //     $table->string('nm_pasien');
+        //     $table->text('alamat');
+        //     $table->timestamps();
+        // });
+
         Schema::create('pasiens', function (Blueprint $table) {
             $table->id();
             $table->string('no_rkm_medis')->unique();

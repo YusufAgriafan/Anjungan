@@ -11,10 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Schema::create('kartu_berobats', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('no_kartu_berobat')->unique();
+        //     $table->string('nm_pasien');
+        //     $table->timestamps();
+        // });
+
         Schema::create('kartu_berobats', function (Blueprint $table) {
             $table->id();
             $table->string('no_kartu_berobat')->unique();
-            $table->string('nm_pasien');
+            $table->unsignedBigInteger('pasien_id');
+            $table->foreign('pasien_id')->references('id')->on('pasiens')->onDelete('cascade');
             $table->timestamps();
         });
     }

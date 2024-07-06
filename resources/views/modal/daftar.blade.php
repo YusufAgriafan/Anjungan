@@ -170,19 +170,6 @@
                             <option value="Micare">Micare</option>
                             <option value="BPJS Kesehatan">BPJS Kesehatan</option>
                           </select>
-                        <option value="Umum">Umum</option>
-                        <option value="Sinarmas">Sinarmas</option>
-                        <option value="BRI">BRI</option>
-                        <option value="BNI">BNI</option>
-                        <option value="Mandiri Inhealth">Mandiri Inhealth</option>
-                        <option value="PT. Pamapersada Nusantara">PT. Pamapersada Nusantara</option>
-                        <option value="Jasa Raharja">Jasa Raharja</option>
-                        <option value="Owlexa">Owlexa</option>
-                        <option value="Admedika">Admedika</option>
-                        <option value="Kemenkes">Kemenkes</option>
-                        <option value="Micare">Micare</option>
-                        <option value="BPJS Kesehatan">BPJS Kesehatan</option>
-                        </select>
                         <label for="metode_pembayaran">Cara Bayar</label>
                     </div>
                 </div>

@@ -66,21 +66,6 @@ class DatabaseSeeder extends Seeder
             'updated_at' => now(),]
         ]);
 
-        DB::table('kartu_berobats')->insert([
-            [
-                'no_kartu_berobat' => 'KB001',
-                'nm_pasien' => 'John Doe',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'no_kartu_berobat' => 'KB002',
-                'nm_pasien' => 'Jane Doe',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
-
         DB::table('pasiens')->insert([
             [
                 'no_rkm_medis' => 'RM001',
@@ -98,26 +83,40 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
-        DB::table('daftars')->insert([
+        $johnDoeId = DB::table('pasiens')->where('no_rkm_medis', 'RM001')->value('id');
+        $janeDoeId = DB::table('pasiens')->where('no_rkm_medis', 'RM002')->value('id');
+
+        DB::table('kartu_berobats')->insert([
             [
-                'no_rkm_medis' => 'RM001',
-                'nm_pasien' => 'John Doe',
-                'metode_pembayaran' => 'BPJS',
-                'tanggal_kunjungan' => '2024-06-26',
-                'kd_poli' => 'U0001',
-                'kd_dokter' => 'dr_andi',
-                'alamat' => '123 Main St',
+                'no_kartu_berobat' => 'KB001',
+                'pasien_id' => $johnDoeId,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'no_rkm_medis' => 'RM002',
-                'nm_pasien' => 'Jane Doe',
+                'no_kartu_berobat' => 'KB002',
+                'pasien_id' => $janeDoeId,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+
+        DB::table('daftars')->insert([
+            [
+                'pasien_id' => $johnDoeId,
+                'metode_pembayaran' => 'BPJS',
+                'tanggal_kunjungan' => '2024-06-26',
+                'kd_poli' => 'U0001',
+                'kd_dokter' => 'dr_andi',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'pasien_id' => $janeDoeId,
                 'metode_pembayaran' => 'Umum',
                 'tanggal_kunjungan' => '2024-06-27',
                 'kd_poli' => 'U0002',
                 'kd_dokter' => 'dr_sri',
-                'alamat' => '456 Oak St',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

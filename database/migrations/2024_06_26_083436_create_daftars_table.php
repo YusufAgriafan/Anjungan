@@ -11,18 +11,30 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Schema::create('daftars', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('no_rkm_medis')->unique();
+        //     $table->string('nm_pasien');
+        //     $table->string('metode_pembayaran');
+        //     $table->date('tanggal_kunjungan');
+        //     $table->string('kd_poli');
+        //     $table->string('kd_dokter');
+        //     $table->text('alamat');
+        //     $table->timestamps();
+
         Schema::create('daftars', function (Blueprint $table) {
             $table->id();
-            $table->string('no_rkm_medis')->unique();
-            $table->string('nm_pasien');
+            $table->unsignedBigInteger('pasien_id');
+            $table->foreign('pasien_id')->references('id')->on('pasiens')->onDelete('cascade');
             $table->string('metode_pembayaran');
             $table->date('tanggal_kunjungan');
             $table->string('kd_poli');
             $table->string('kd_dokter');
-            $table->text('alamat');
             $table->timestamps();
-
+            
         });
+
+        
     }
 
     /**
