@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Loket;
+use App\Models\Daftar;
+use App\Models\Dokter;
 use App\Models\Antrean;
 use Illuminate\Http\Request;
 
@@ -10,15 +12,17 @@ class AntreanController extends Controller
 {
     public function index()
     {
+        $dokters = Dokter::all();
+
         $lastLoketCode = Antrean::where('code', 'LIKE', 'A%')->orderBy('created_at', 'desc')->first();
         $lastCsCode = Antrean::where('code', 'LIKE', 'B%')->orderBy('created_at', 'desc')->first();
 
         $nextLoketCode = $lastLoketCode ? 'A' . (intval(substr($lastLoketCode->code, 1)) + 1) : 'A1';
         $nextCsCode = $lastCsCode ? 'B' . (intval(substr($lastCsCode->code, 1)) + 1) : 'B1';
 
-        return view('index', compact('nextLoketCode', 'nextCsCode'));
+        return view('index', compact('nextLoketCode', 'nextCsCode', 'dokters'));
     }
-
+    
     public function create($type)
     {
         // Validasi tipe antrian
@@ -57,6 +61,18 @@ class AntreanController extends Controller
     {
         // Implementasi untuk generate PDF
     }
+
+
+    public function tampilanDaftar()
+    {
+        // $dokter = Dokter::findOrFail($dokterId);
+        // $daftars = Daftar::where('dokter_id', $dokterId)->with('pasien')->get();
+        // return view('tampilan_daftar', compact('dokter', 'daftars'));
+
+        $dokters = Dokter::with('daftars.pasien')->get();
+        return view('tampilan_daftar', compact('dokters'));
+    }
+
 
     // public function antrean()
     // {

@@ -3,7 +3,7 @@
 @section('content')
     
     <!-- Hero Start -->
-    <div class="container-fluid bg-primary hero-header mb-5">
+    {{-- <div class="container-fluid bg-primary hero-header mb-5">
         <div class="container">
             <div class="row g-5 align-items-center">
                 <div class="col-lg-12 text-center text-lg-start">
@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Hero End -->
 
     <!-- Feature Start -->
