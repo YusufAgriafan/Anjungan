@@ -6,6 +6,7 @@ use App\Models\Loket;
 use App\Models\Daftar;
 use App\Models\Dokter;
 use App\Models\Antrean;
+use App\Models\Poliklinik;
 use Illuminate\Http\Request;
 
 class AntreanController extends Controller
@@ -13,6 +14,7 @@ class AntreanController extends Controller
     public function index()
     {
         $dokters = Dokter::all();
+        $polis = Poliklinik::all();
 
         $lastLoketCode = Antrean::where('code', 'LIKE', 'A%')->orderBy('created_at', 'desc')->first();
         $lastCsCode = Antrean::where('code', 'LIKE', 'B%')->orderBy('created_at', 'desc')->first();
@@ -20,7 +22,7 @@ class AntreanController extends Controller
         $nextLoketCode = $lastLoketCode ? 'A' . (intval(substr($lastLoketCode->code, 1)) + 1) : 'A1';
         $nextCsCode = $lastCsCode ? 'B' . (intval(substr($lastCsCode->code, 1)) + 1) : 'B1';
 
-        return view('index', compact('nextLoketCode', 'nextCsCode', 'dokters'));
+        return view('index', compact('nextLoketCode', 'nextCsCode', 'dokters', 'polis'));
     }
     
     public function create($type)

@@ -54,6 +54,38 @@ class DatabaseSeeder extends Seeder
             
         ]);
 
+        $polikliniks = [
+            ['kd_poli' => 'IGDK', 'nama_poli' => 'Unit IGD'],
+            ['kd_poli' => 'U0001', 'nama_poli' => 'Poli Umum'],
+            ['kd_poli' => 'U0002', 'nama_poli' => 'Poli Anak'],
+            ['kd_poli' => 'U0003', 'nama_poli' => 'Poli Obgyn'],
+            ['kd_poli' => 'U0004', 'nama_poli' => 'Poli Bedah'],
+            ['kd_poli' => 'U0005', 'nama_poli' => 'Poli Mata'],
+            ['kd_poli' => 'U0006', 'nama_poli' => 'Poli Gigi'],
+            ['kd_poli' => 'U0007', 'nama_poli' => 'Poli Penyakit Dalam'],
+            ['kd_poli' => 'U0008', 'nama_poli' => 'Poli Orthopedi'],
+            ['kd_poli' => 'U0009', 'nama_poli' => 'Poli Syaraf'],
+            ['kd_poli' => 'U0010', 'nama_poli' => 'Poli Paru'],
+            ['kd_poli' => 'U0011', 'nama_poli' => 'Poli Kulit & Kelamin'],
+            ['kd_poli' => 'U0012', 'nama_poli' => 'Radiologi'],
+            ['kd_poli' => 'U0013', 'nama_poli' => 'Laboratorium'],
+            ['kd_poli' => 'U0015', 'nama_poli' => 'Rehab Medik'],
+            ['kd_poli' => 'U0016', 'nama_poli' => 'Gizi'],
+            ['kd_poli' => 'U0017', 'nama_poli' => 'Moms Care'],
+            ['kd_poli' => 'U0018', 'nama_poli' => 'Poli Nyeri'],
+            ['kd_poli' => 'U0019', 'nama_poli' => 'TeleMedicine'],
+            ['kd_poli' => 'U0020', 'nama_poli' => 'Poli Andrologi'],
+            ['kd_poli' => 'U0021', 'nama_poli' => 'Rehab Medik'],
+            ['kd_poli' => 'U0022', 'nama_poli' => 'Farmasi'],
+            ['kd_poli' => 'U0023', 'nama_poli' => 'Home Visite'],
+            ['kd_poli' => 'U0024', 'nama_poli' => 'Home Care'],
+            ['kd_poli' => 'U0025', 'nama_poli' => 'Poli Jantung'],
+            ['kd_poli' => 'U0026', 'nama_poli' => 'Poli THT'],
+            ['kd_poli' => 'U0027', 'nama_poli' => 'Poli Neurologi'],
+        ];
+
+        DB::table('polikliniks')->insert($polikliniks);
+
         DB::table('lokets')->insert([
             ['codeLoket' => 'A',
             'created_at' => now(),
@@ -84,10 +116,10 @@ class DatabaseSeeder extends Seeder
 
         // Seed data for dokters
         DB::table('dokters')->insert([
-            ['nama' => 'Dr. Andi', 'created_at' => now(), 'updated_at' => now()],
-            ['nama' => 'Dr. Sri', 'created_at' => now(), 'updated_at' => now()],
-            ['nama' => 'Dr. Lisa', 'created_at' => now(), 'updated_at' => now()],
-            ['nama' => 'Dr. Mike', 'created_at' => now(), 'updated_at' => now()],
+            ['nama' => 'Dr. Andi', 'kd_poli' => 'U0001', 'created_at' => now(), 'updated_at' => now()],
+            ['nama' => 'Dr. Sri', 'kd_poli' => 'U0002','created_at' => now(), 'updated_at' => now()],
+            ['nama' => 'Dr. Lisa', 'kd_poli' => 'U0003', 'created_at' => now(), 'updated_at' => now()],
+            ['nama' => 'Dr. Mike', 'kd_poli' => 'U0004', 'created_at' => now(), 'updated_at' => now()],
         ]);
 
         $drAndiId = DB::table('dokters')->where('nama', 'Dr. Andi')->value('id');

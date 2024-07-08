@@ -66,27 +66,28 @@ class DaftarController extends Controller
                 'metode_pembayaran' => 'required|string',
                 'tanggal_kunjungan' => 'required|date',
                 'kd_poli' => 'required|string',
-                'kd_dokter' => 'required|string',
+                'kd_dokter' => 'required|integer',
                 'alamat' => 'required|string',
             ]);
 
-            $kartuBerobat = KartuBerobat::where('no_kartu_berobat', $validatedData['no_rkm_medis'])->first();
+            $pasien = Pasien::where('no_rkm_medis', $validatedData['no_rkm_medis'])->first();
 
-            if (!$kartuBerobat) {
+            if (!$pasien) {
                 return response()->json([
                     'success' => false,
-                    'error' => 'Nomor Kartu Berobat tidak ditemukan.',
+                    'error' => 'Nomor Rekam Medik tidak ditemukan.',
                 ]);
             }
+            $dokterId = $validatedData['kd_dokter'];
 
-            $daftar = Daftar::create([
-                'pasien_id' => $kartuBerobat->pasien_id,
-                'metode_pembayaran' => $validatedData['metode_pembayaran'],
-                'tanggal_kunjungan' => $validatedData['tanggal_kunjungan'],
-                'kd_poli' => $validatedData['kd_poli'],
-                'dokter_id' => Dokter::where('nama', $validatedData['kd_dokter'])->value('id'),
-                'alamat' => $validatedData['alamat'],
-            ]);
+            $daftar = new Daftar;
+            $daftar->pasien_id = $pasien->id;
+            $daftar->dokter_id = $dokterId;
+            $daftar->metode_pembayaran = $request->metode_pembayaran;
+            $daftar->tanggal_kunjungan = $request->tanggal_kunjungan;
+            $daftar->kd_poli = $request->kd_poli;
+            $daftar->alamat = $request->alamat;
+            $daftar->save();
 
             return response()->json([
                 'success' => true,

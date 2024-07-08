@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dokters', function (Blueprint $table) {
+        Schema::create('polikliniks', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('kd_poli');
-            $table->foreign('kd_poli')->references('kd_poli')->on('polikliniks')->onDelete('cascade');
+            $table->string('kd_poli')->unique();
+            $table->string('nama_poli');
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dokters');
+        Schema::dropIfExists('polikliniks');
     }
 };

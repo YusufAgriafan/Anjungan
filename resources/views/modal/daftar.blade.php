@@ -85,7 +85,18 @@
                 <div class="form-floating">
                     <select id="metode_pembayaran" class="form-control" name="metode_pembayaran">
                         <option value="" selected hidden disabled>Pilih Metode Pembayaran</option>
-                        <option value="Umum">Umum</option>
+                            <option value="Umum">Umum</option>
+                            <option value="Sinarmas">Sinarmas</option>
+                            <option value="BRI">BRI</option>
+                            <option value="BNI">BNI</option>
+                            <option value="Mandiri Inhealth">Mandiri Inhealth</option>
+                            <option value="PT. Pamapersada Nusantara">PT. Pamapersada Nusantara</option>
+                            <option value="Jasa Raharja">Jasa Raharja</option>
+                            <option value="Owlexa">Owlexa</option>
+                            <option value="Admedika">Admedika</option>
+                            <option value="Kemenkes">Kemenkes</option>
+                            <option value="Micare">Micare</option>
+                            <option value="BPJS Kesehatan">BPJS Kesehatan</option>
                         <!-- Add other options as needed -->
                     </select>
                     <label for="metode_pembayaran">Cara Bayar</label>
@@ -101,33 +112,9 @@
                 <div class="form-floating">
                     <select id="kd_poli" class="form-control" name="kd_poli">
                         <option value="" selected hidden disabled>Pilih Poli</option>
-                        <option value="IGDK">Unit IGD</option>
-                            <option value="U0001">Poli Umum</option>
-                            <option value="U0002">Poli Anak</option>
-                            <option value="U0003">Poli Obgyn</option>
-                            <option value="U0004">Poli Bedah</option>
-                            <option value="U0005">Poli Mata</option>
-                            <option value="U0006">Poli Gigi</option>
-                            <option value="U0007">Poli Penyakit Dalam</option>
-                            <option value="U0008">Poli Orthopedi</option>
-                            <option value="U0009">Poli Syaraf</option>
-                            <option value="U0010">Poli Paru</option>
-                            <option value="U0011">Poli Kulit &amp; Kelamin</option>
-                            <option value="U0012">Radiologi</option>
-                            <option value="U0013">Laboratorium</option>
-                            <option value="U0015">Rehab Medik</option>
-                            <option value="U0016">Gizi</option>
-                            <option value="U0017">Moms Care</option>
-                            <option value="U0018">Poli Nyeri</option>
-                            <option value="U0019">TeleMedicine</option>
-                            <option value="U0020">Poli Andrologi</option>
-                            <option value="U0021">Rehab Medik</option>
-                            <option value="U0022">Farmasi</option>
-                            <option value="U0023">Home Visite</option>
-                            <option value="U0024">Home Care</option>
-                            <option value="U0025">Poli Jantung</option>
-                            <option value="U0026">Poli THT</option>
-                            <option value="U0027">Poli Neurologi</option>
+                        @foreach ($polis as $poli)
+                            <option value="{{ $poli->kd_poli }}">{{ $poli->nama_poli }}</option>
+                        @endforeach
                     </select>
                     <label for="kd_poli">Pilih Poli</label>
                 </div>
@@ -135,14 +122,37 @@
             <div class="col-md-6">
                 <div class="form-floating">
                     <select id="kd_dokter" class="form-control" name="kd_dokter">
-                        <option value="" selected hidden disabled>Pilih Dokter</option>
+                        <option value="" selected hidden disabled>Pilih Poliklinik kemudian Pilih Dokter</option>
                         @foreach ($dokters as $dokter)
-                            <option value="{{ $dokter->id }}">{{ $dokter->nama }}</option>
+                            <option value="{{ $dokter->id }}" data-kd-poli="{{ $dokter->kd_poli }}">{{ $dokter->nama }}</option>
                         @endforeach
                     </select>
                     <label for="kd_dokter">Pilih Dokter</label>
                 </div>
             </div>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $('#kd_poli').on('change', function() {
+                        var selectedPoli = $(this).val();
+                        $('#kd_dokter option').each(function() {
+                            var dokterPoli = $(this).data('kd-poli');
+                            if (selectedPoli === dokterPoli || dokterPoli === undefined) {
+                                $(this).show();
+                            } else {
+                                $(this).hide();
+                            }
+                        });
+                        // Set the first visible option as selected
+                        $('#kd_dokter').val($('#kd_dokter option:visible:first').val());
+                    });
+
+                    // Trigger change event to filter doctors on page load if kd_poli is pre-selected
+                    $('#kd_poli').trigger('change');
+                });
+            </script>
+
             <div class="col-12">
                 <div class="form-floating">
                     <textarea class="form-control" placeholder="Masukan Alamat Lengkap" id="alamat" name="alamat" style="height: 100px"></textarea>
