@@ -84,13 +84,22 @@
         <tbody>
             @foreach ($dokters as $dokter)
                 <tr>
-                    <td rowspan="{{ $dokter->daftars->count() ?: 1 }}">{{ $dokter->nama }}</td>
+                    <td rowspan="{{ $dokter->daftars->count() ?: 1 }}">
+                        {{ $dokter->nama }}
+                        <div class="poli-info">
+                            @if($dokter->poli)
+                                {{ $dokter->poli->nama_poli }}<br>
+                            @else
+                                Poliklinik tidak ditemukan<br>
+                            @endif
+                            Antrean: {{ $dokter->daftars->count() }}<br>
+                            Terlayani: {{ $dokter->daftars->where('status', 'terlayani')->count() }}<br>
+                            Batal: {{ $dokter->daftars->where('status', 'batal')->count() }}
+                        </div>
+                    </td>
                     @forelse ($dokter->daftars as $index => $daftar)
                         @if ($index > 0) <tr> @endif
-                        <td>{{ $daftar->pasien->nm_pasien }}</td>
-                        {{-- <td>{{ $daftar->metode_pembayaran }}</td>
-                        <td>{{ $daftar->tanggal_kunjungan }}</td>
-                        <td>{{ $daftar->kd_poli }}</td> --}}
+                        <td>{{ $daftar->pasien->nm_pasien }}, ( {{ rand(1, 20) }} )</td>
                         </tr>
                     @empty
                         <td colspan="4">Tidak ada kunjungan</td>
