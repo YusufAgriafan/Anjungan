@@ -70,44 +70,44 @@
 
 <div class="title">Display Daftar Antrean</div>
 
-<div class="table-container" id="table-container">
-    <table class="table" id="table">
-        <thead>
-            <tr>
-                <th>Nama Dokter</th>
-                <th>Nama Pasien</th>
-                {{-- <th>Metode Pembayaran</th>
-                <th>Tanggal Kunjungan</th>
-                <th>Poliklinik</th> --}}
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($dokters as $dokter)
+    <div class="table-container" id="table-container">
+        <table class="table" id="table">
+            <thead style="position: sticky; top: 0; z-index: 2;">
                 <tr>
-                    <td rowspan="{{ $dokter->daftars->count() ?: 1 }}">
-                        {{ $dokter->nama }}
-                        <div class="poli-info">
-                            @if($dokter->poli)
-                                {{ $dokter->poli->nama_poli }}<br>
-                            @else
-                                Poliklinik tidak ditemukan<br>
-                            @endif
-                            Antrean: {{ $dokter->daftars->count() }}<br>
-                            Terlayani: {{ $dokter->daftars->where('status', 'terlayani')->count() }}<br>
-                            Batal: {{ $dokter->daftars->where('status', 'batal')->count() }}
-                        </div>
-                    </td>
-                    @forelse ($dokter->daftars as $index => $daftar)
-                        @if ($index > 0) <tr> @endif
-                        <td>{{ $daftar->pasien->nm_pasien }}, ( {{ rand(1, 20) }} )</td>
-                        </tr>
-                    @empty
-                        <td colspan="4">Tidak ada kunjungan</td>
-                    @endforelse
-            @endforeach
-        </tbody>
-    </table>
-</div>
+                    <th>Nama Dokter</th>
+                    <th>Nama Pasien</th>
+                    {{-- <th>Metode Pembayaran</th>
+                    <th>Tanggal Kunjungan</th>
+                    <th>Poliklinik</th> --}}
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($dokters as $dokter)
+                    <tr>
+                        <td rowspan="{{ $dokter->daftars->count() ?: 1 }}">
+                            {{ $dokter->nama }}
+                            <div class="poli-info">
+                                @if($dokter->poli)
+                                    {{ $dokter->poli->nama_poli }}<br>
+                                @else
+                                    Poliklinik tidak ditemukan<br>
+                                @endif
+                                Antrean: {{ $dokter->daftars->count() }} -
+                                Terlayani: {{ $dokter->daftars->where('status', 'terlayani')->count() }} -
+                                Batal: {{ $dokter->daftars->where('status', 'batal')->count() }}
+                            </div>
+                        </td>
+                        @forelse ($dokter->daftars as $index => $daftar)
+                            @if ($index > 0) <tr> @endif
+                            <td>{{ $daftar->pasien->nm_pasien }}, ( {{ rand(1, 20) }} )</td>
+                            </tr>
+                        @empty
+                            <td colspan="4">Tidak ada kunjungan</td>
+                        @endforelse
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
 <!-- Menggunakan Bootstrap JS dan jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

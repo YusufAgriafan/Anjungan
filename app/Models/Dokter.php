@@ -13,4 +13,9 @@ class Dokter extends Model
     {
         return $this->hasMany(Daftar::class);
     }
+
+    public function poli()
+    {
+        return $this->belongsTo(Poliklinik::class, 'kd_poli', 'kd_poli');
+    }
 }

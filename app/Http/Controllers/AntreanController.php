@@ -71,7 +71,7 @@ class AntreanController extends Controller
         // $daftars = Daftar::where('dokter_id', $dokterId)->with('pasien')->get();
         // return view('tampilan_daftar', compact('dokter', 'daftars'));
 
-        $dokters = Dokter::with('daftars.pasien')->get();
+        $dokters = Dokter::with(['poli', 'daftars.pasien'])->get();
         return view('tampilan_daftar', compact('dokters'));
     }
 
