@@ -52,6 +52,7 @@ Route::get('/generate-pdf', function (Illuminate\Http\Request $request) {
 Route::get('/daftar-pdf', function (Illuminate\Http\Request $request) {
     $no_rkm_medis = $request->input('no_rkm_medis');
     $nm_pasien = $request->input('nm_pasien');
+    $kd_antrean = $request->input('kd_antrean');
     $metode_pembayaran = $request->input('metode_pembayaran');
     $tanggal_kunjungan = $request->input('tanggal_kunjungan');
     $kd_poli = $request->input('kd_poli');
@@ -60,7 +61,7 @@ Route::get('/daftar-pdf', function (Illuminate\Http\Request $request) {
 
     $dateTime = now()->format('Y-m-d H:i');
     $pdf = new Dompdf();
-    $pdf->loadHtml(View::make('pdf_daftar', compact('no_rkm_medis', 'nm_pasien', 'dateTime','metode_pembayaran', 'tanggal_kunjungan',  'kd_poli', 'kd_dokter', 'alamat'))->render());
+    $pdf->loadHtml(View::make('pdf_daftar', compact('kd_antrean', 'no_rkm_medis', 'nm_pasien', 'dateTime','metode_pembayaran', 'tanggal_kunjungan',  'kd_poli', 'kd_dokter', 'alamat'))->render());
     $pdf->setPaper('A6', 'portrait');
     $pdf->render();
     return $pdf->stream('daftar.pdf');
@@ -84,6 +85,7 @@ Route::prefix('dashboard')->name('admin.')->middleware('auth')->group(function (
         Route::get('/display/{codeLoket}', [AdminAntreanController::class, 'showTopAntrean'])->name('display');
         Route::post('/telat/{id}', [AdminAntreanController::class, 'telat'])->name('telat');
         Route::post('/serve/{id}', [AdminAntreanController::class, 'serve'])->name('serve');
+        Route::post('/cancel/{id}', [AdminAntreanController::class, 'cancel'])->name('cancel');
         Route::put('/admin/antrean/{id}/ubah/{codeLoket}', [AdminAntreanController::class, 'ubah'])->name('ubah');
         Route::delete('/{id}', [AdminAntreanController::class, 'destroy'])->name('destroy');
     });

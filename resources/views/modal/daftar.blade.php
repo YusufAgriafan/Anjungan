@@ -83,6 +83,13 @@
             </div>
             <div class="col-md-6">
                 <div class="form-floating">
+                    <input type="text" class="form-control" id="kd_antrean" name="kd_antrean" placeholder="Kode Antrean">
+                    <label for="kd_antrean">Kode Antrean</label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-floating">
                     <select id="metode_pembayaran" class="form-control" name="metode_pembayaran">
                         <option value="" selected hidden disabled>Pilih Metode Pembayaran</option>
                             <option value="Umum">Umum</option>
@@ -177,6 +184,7 @@
             var formData = {
                 no_rkm_medis: $('#no_rkm_medis').val().trim(),
                 nm_pasien: $('#nm_pasien').val().trim(),
+                kd_antrean: $('#kd_antrean').val().trim(),
                 metode_pembayaran: $('#metode_pembayaran').val(),
                 tanggal_kunjungan: $('#tanggal_kunjungan').val(),
                 kd_poli: $('#kd_poli').val(),
@@ -194,7 +202,7 @@
                 success: function (response) {
                     if (response.success) {
                         alert('Pendaftaran berhasil disimpan');
-                        var printWindow = window.open(`{{ route('daftar.pdf') }}?no_rkm_medis=${formData.no_rkm_medis}&nm_pasien=${formData.nm_pasien}&metode_pembayaran=${formData.metode_pembayaran}&tanggal_kunjungan=${formData.tanggal_kunjungan}&kd_poli=${formData.kd_poli}&kd_dokter=${formData.kd_dokter}&alamat=${formData.alamat}`, '_blank');
+                        var printWindow = window.open(`{{ route('daftar.pdf') }}?no_rkm_medis=${formData.no_rkm_medis}&nm_pasien=${formData.nm_pasien}&kd_antrean=${formData.kd_antrean}&metode_pembayaran=${formData.metode_pembayaran}&tanggal_kunjungan=${formData.tanggal_kunjungan}&kd_poli=${formData.kd_poli}&kd_dokter=${formData.kd_dokter}&alamat=${formData.alamat}`, '_blank');
                         printWindow.addEventListener('load', function() {
                             printWindow.print();
                         });

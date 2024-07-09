@@ -84,6 +84,12 @@
             <div class="horizontal-line"></div>
             <div class="table-container">
                 <div class="table-row">
+                    <div class="table-cell form-label">Nomor Antrean:</div>
+                    <div class="table-cell">
+                        <input class="form-input" type="text" value="{{ $kd_antrean }}" readonly>
+                    </div>
+                </div>
+                <div class="table-row">
                     <div class="table-cell form-label">Nomor Rekam Medis:</div>
                     <div class="table-cell">
                         <input class="form-input" type="text" value="{{ $no_rkm_medis }}" readonly>

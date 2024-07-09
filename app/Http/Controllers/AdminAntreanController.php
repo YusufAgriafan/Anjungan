@@ -29,7 +29,7 @@ class AdminAntreanController extends Controller
         $data['message'] = 'Data Diperbarui';
         $pusher->trigger('antrean-channel', 'events.AntreanUpdated', $data);
 
-        return redirect()->route('admin.antrean.index')->with('success', 'Antrian berhasil direset.');
+        return redirect()->route('admin.loket.index')->with('success', 'Antrian berhasil direset.');
     }
 
     public function daftarantrean()
@@ -279,6 +279,29 @@ class AdminAntreanController extends Controller
         $pusher->trigger('antrean-channel', 'events.AntreanUpdated', $data);
 
         return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean telah dilayani.');
+    }
+
+    public function cancel($id)
+    {
+        $antrean = Antrean::findOrFail($id);
+        $antrean->cancel = 1;
+        $antrean->updated_at = now();
+        $antrean->save();
+
+        $pusher = new \Pusher\Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            [
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'useTLS' => true
+            ]
+        );
+
+        $data['message'] = 'Data Diperbarui';
+        $pusher->trigger('antrean-channel', 'events.AntreanUpdated', $data);
+
+        return redirect()->route('admin.antrean.index', $antrean->codeLoket)->with('success', 'Antrean telah dibatalkan.');
     }
 
     public function ubah($id, $codeLoket)

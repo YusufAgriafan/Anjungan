@@ -139,12 +139,10 @@ class DatabaseSeeder extends Seeder
 
         // Seed data for daftars
         DB::table('daftars')->insert([
-            ['pasien_id' => $johnDoeId, 'metode_pembayaran' => 'BPJS', 'tanggal_kunjungan' => '2024-06-26', 'kd_poli' => 'U0001', 'dokter_id' => $drAndiId, 'created_at' => now(), 'updated_at' => now()],
-            ['pasien_id' => $janeDoeId, 'metode_pembayaran' => 'Umum', 'tanggal_kunjungan' => '2024-06-27', 'kd_poli' => 'U0002', 'dokter_id' => $drSriId, 'created_at' => now(), 'updated_at' => now()],
-            ['pasien_id' => $aliceSmithId, 'metode_pembayaran' => 'Asuransi', 'tanggal_kunjungan' => '2024-06-28', 'kd_poli' => 'U0003', 'dokter_id' => $drLisaId, 'created_at' => now(), 'updated_at' => now()],
-            ['pasien_id' => $bobJohnsonId, 'metode_pembayaran' => 'BPJS', 'tanggal_kunjungan' => '2024-06-29', 'kd_poli' => 'U0001', 'dokter_id' => $drMikeId, 'created_at' => now(), 'updated_at' => now()],
-            ['pasien_id' => $charlieBrownId, 'metode_pembayaran' => 'Umum', 'tanggal_kunjungan' => '2024-07-01', 'kd_poli' => 'U0002', 'dokter_id' => $drAndiId, 'created_at' => now(), 'updated_at' => now()],
-            ['pasien_id' => $dianaPrinceId, 'metode_pembayaran' => 'Asuransi', 'tanggal_kunjungan' => '2024-07-02', 'kd_poli' => 'U0003', 'dokter_id' => $drSriId, 'created_at' => now(), 'updated_at' => now()],
+            ['pasien_id' => $johnDoeId, 'dokter_id' => $drAndiId, 'code' => 'A1', 'metode_pembayaran' => 'BPJS', 'tanggal_kunjungan' => '2024-06-26', 'kd_poli' => 'U0001', 'created_at' => now(), 'updated_at' => now()],
+            ['pasien_id' => $janeDoeId, 'dokter_id' => $drSriId, 'code' => 'A2', 'metode_pembayaran' => 'Asuransi', 'tanggal_kunjungan' => '2024-06-27', 'kd_poli' => 'U0002', 'created_at' => now(), 'updated_at' => now()],
+            ['pasien_id' => $aliceSmithId, 'dokter_id' => $drLisaId, 'code' => 'B1', 'metode_pembayaran' => 'Tunai', 'tanggal_kunjungan' => '2024-06-28', 'kd_poli' => 'U0003', 'created_at' => now(), 'updated_at' => now()],
+            ['pasien_id' => $bobJohnsonId, 'dokter_id' => $drMikeId, 'code' => 'B2', 'metode_pembayaran' => 'BPJS', 'tanggal_kunjungan' => '2024-06-29', 'kd_poli' => 'U0004', 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 }

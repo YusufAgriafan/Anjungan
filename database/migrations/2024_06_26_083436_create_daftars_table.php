@@ -28,6 +28,7 @@ return new class extends Migration
             $table->foreign('pasien_id')->references('id')->on('pasiens')->onDelete('cascade');
             $table->unsignedBigInteger('dokter_id');
             $table->foreign('dokter_id')->references('id')->on('dokters')->onDelete('cascade');
+            $table->string('code');
             $table->string('metode_pembayaran');
             $table->date('tanggal_kunjungan');
             $table->string('kd_poli');
@@ -35,8 +36,6 @@ return new class extends Migration
             $table->timestamps();
             
         });
-
-        
     }
 
     /**

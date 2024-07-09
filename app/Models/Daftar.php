@@ -19,9 +19,15 @@ class Daftar extends Model
         return $this->belongsTo(Dokter::class);
     }
 
+    public function antrean()
+    {
+        return $this->belongsTo(Antrean::class, 'code', 'code');
+    }
+
     protected $fillable = [
         'no_rkm_medis',
         'nm_pasien',
+        'code',
         'metode_pembayaran',
         'tanggal_kunjungan',
         'kd_poli',

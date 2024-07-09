@@ -67,11 +67,17 @@ class AntreanController extends Controller
 
     public function tampilanDaftar()
     {
-        // $dokter = Dokter::findOrFail($dokterId);
-        // $daftars = Daftar::where('dokter_id', $dokterId)->with('pasien')->get();
-        // return view('tampilan_daftar', compact('dokter', 'daftars'));
+        $dokters = Dokter::with(['poli', 'daftars.pasien'])->get()->map(function($dokter) {
+            $dokter->total_antrean = $dokter->daftars->count();
+            $dokter->total_terlayani = $dokter->daftars->filter(function($daftar) {
+                return $daftar->antrean && $daftar->antrean->serve == '1';
+            })->count();
+            $dokter->total_batal = $dokter->daftars->filter(function($daftar) {
+                return $daftar->antrean && $daftar->antrean->cancel == '1';
+            })->count();
+            return $dokter;
+        });
 
-        $dokters = Dokter::with(['poli', 'daftars.pasien'])->get();
         return view('tampilan_daftar', compact('dokters'));
     }
 

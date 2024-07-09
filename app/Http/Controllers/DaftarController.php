@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Antrean;
 use App\Models\Daftar;
 use App\Models\Dokter;
 use App\Models\Pasien;
@@ -67,10 +68,19 @@ class DaftarController extends Controller
                 'tanggal_kunjungan' => 'required|date',
                 'kd_poli' => 'required|string',
                 'kd_dokter' => 'required|integer',
+                'kd_antrean' => 'required|string',
                 'alamat' => 'required|string',
             ]);
 
+            $antrean = Antrean::where('code', $validatedData['kd_antrean'])->first();
             $pasien = Pasien::where('no_rkm_medis', $validatedData['no_rkm_medis'])->first();
+
+            if (!$antrean) {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Nomor Antrean tidak ditemukan, ambil nomor terlebih dahulu di menu Antrean.',
+                ]);
+            }
 
             if (!$pasien) {
                 return response()->json([
@@ -80,8 +90,17 @@ class DaftarController extends Controller
             }
             $dokterId = $validatedData['kd_dokter'];
 
+            // $daftarExist = Daftar::where('code', $validatedData['kd_antrean'])->first();
+            // if ($daftarExist) {
+            //     return response()->json([
+            //         'success' => false,
+            //         'error' => 'Kode antrean sudah digunakan, silakan ambil nomor antrean baru.',
+            //     ]);
+            // }
+
             $daftar = new Daftar;
             $daftar->pasien_id = $pasien->id;
+            $daftar->code = $antrean->code;
             $daftar->dokter_id = $dokterId;
             $daftar->metode_pembayaran = $request->metode_pembayaran;
             $daftar->tanggal_kunjungan = $request->tanggal_kunjungan;

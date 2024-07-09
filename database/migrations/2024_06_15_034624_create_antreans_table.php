@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('antreans', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
+            $table->string('code')->unique();
             $table->boolean('served')->default(false);
+            $table->boolean('cancel')->default(false);
             $table->string('codeLoket')->nullable();
             $table->timestamps();
         });

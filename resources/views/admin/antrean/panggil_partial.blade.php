@@ -29,6 +29,14 @@
                                                     <form id="telat-form-{{ $antrean->id }}" action="{{ route('admin.antrean.telat', $antrean->id) }}" method="POST" style="display: none;">
                                                         @csrf
                                                     </form>
+                                                    <button class="btn btn-primary btn-sm" onclick="event.preventDefault(); if(confirm('Apakah benar sudah terlayani?')) { document.getElementById('serve-form-{{ $antrean->id }}').submit(); }">Terlayani</button>
+                                                    <form id="serve-form-{{ $antrean->id }}" action="{{ route('admin.antrean.serve', $antrean->id) }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                    </form>
+                                                    <button class="btn btn-dark btn-sm" onclick="event.preventDefault(); if(confirm('Apakah benar dibatalkan?')) { document.getElementById('cancel-form-{{ $antrean->id }}').submit(); }">Batal</button>
+                                                    <form id="cancel-form-{{ $antrean->id }}" action="{{ route('admin.antrean.cancel', $antrean->id) }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                    </form>
                                                     <form action="{{ route('admin.antrean.destroy', $antrean->id) }}" class="d-inline" onsubmit="return confirm('Apakah kamu yakin menghapus antrean ini?')" method="POST">
                                                         @csrf
                                                         @method('delete')

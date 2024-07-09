@@ -63,51 +63,77 @@
         tr:nth-child(even) {
             background-color: #f2f2f2; /* Warna background baris genap */
         }
+        .large-number {
+            font-size: 2rem; /* Ukuran teks yang lebih besar */
+            font-weight: bold; /* Teks lebih tebal */
+            color: #007bff; /* Warna teks biru */
+        }
     </style>
-
 </head>
 <body>
 
 <div class="title">Display Daftar Antrean</div>
 
-    <div class="table-container" id="table-container">
-        <table class="table" id="table">
-            <thead style="position: sticky; top: 0; z-index: 2;">
+<div class="table-container" id="table-container">
+    <table class="table" id="table">
+        <thead style="position: sticky; top: 0; z-index: 2;">
+            <tr>
+                <th>Nama Dokter</th>
+                <th>Nama Pasien</th>
+                {{-- <th>Metode Pembayaran</th>
+                <th>Tanggal Kunjungan</th>
+                <th>Poliklinik</th> --}}
+            </tr>
+        </thead>
+        @php
+            function sensorNama($nama) {
+                $length = strlen($nama);
+                $numStars = rand(4, ceil($length / 1.5)); // Jumlah tanda bintang antara 1 dan setengah panjang nama
+                $indexes = [];
+
+                // Pilih indeks unik secara acak untuk menggantikan dengan tanda bintang
+                while (count($indexes) < $numStars) {
+                    $index = rand(0, $length - 1);
+                    if (!in_array($index, $indexes)) {
+                        $indexes[] = $index;
+                    }
+                }
+
+                // Ganti karakter di indeks yang dipilih dengan tanda bintang
+                foreach ($indexes as $index) {
+                    $nama[$index] = '*';
+                }
+
+                return $nama;
+            }
+        @endphp
+        <tbody>
+            @foreach ($dokters as $dokter)
                 <tr>
-                    <th>Nama Dokter</th>
-                    <th>Nama Pasien</th>
-                    {{-- <th>Metode Pembayaran</th>
-                    <th>Tanggal Kunjungan</th>
-                    <th>Poliklinik</th> --}}
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($dokters as $dokter)
-                    <tr>
-                        <td rowspan="{{ $dokter->daftars->count() ?: 1 }}">
-                            {{ $dokter->nama }}
-                            <div class="poli-info">
-                                @if($dokter->poli)
-                                    {{ $dokter->poli->nama_poli }}<br>
-                                @else
-                                    Poliklinik tidak ditemukan<br>
-                                @endif
-                                Antrean: {{ $dokter->daftars->count() }} -
-                                Terlayani: {{ $dokter->daftars->where('status', 'terlayani')->count() }} -
-                                Batal: {{ $dokter->daftars->where('status', 'batal')->count() }}
-                            </div>
-                        </td>
-                        @forelse ($dokter->daftars as $index => $daftar)
-                            @if ($index > 0) <tr> @endif
-                            <td>{{ $daftar->pasien->nm_pasien }}, ( {{ rand(1, 20) }} )</td>
-                            </tr>
-                        @empty
-                            <td colspan="4">Tidak ada kunjungan</td>
-                        @endforelse
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+                    <td rowspan="{{ $dokter->daftars->count() ?: 1 }}">
+                        {{ $dokter->nama }}
+                        <div class="poli-info">
+                            @if($dokter->poli)
+                                {{ $dokter->poli->nama_poli }}<br>
+                            @else
+                                Poliklinik tidak ditemukan<br>
+                            @endif
+                            Antrean: {{ $dokter->total_antrean }} -
+                            Terlayani: {{ $dokter->total_terlayani }} -
+                            Batal: {{ $dokter->total_batal }}
+                        </div>
+                    </td>
+                    @forelse ($dokter->daftars as $index => $daftar)
+                        @if ($index > 0) <tr> @endif
+                        <td>{{ sensorNama($daftar->pasien->nm_pasien) }}, <span class="large-number">( {{ $daftar->code }} )</span></td>
+                        </tr>
+                    @empty
+                        <td colspan="4">Tidak ada kunjungan</td>
+                    @endforelse
+            @endforeach
+        </tbody>
+    </table>
+</div>
 
 <!-- Menggunakan Bootstrap JS dan jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
