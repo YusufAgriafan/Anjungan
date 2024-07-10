@@ -28,29 +28,5 @@
                         return $nama;
                     }
                 @endphp
-                <tbody>
-                    @foreach ($dokters as $dokter)
-                        <tr>
-                            <td rowspan="{{ $dokter->daftars->count() ?: 1 }}">
-                                {{ $dokter->nama }}
-                                <div class="poli-info">
-                                    @if($dokter->poli)
-                                        {{ $dokter->poli->nama_poli }}<br>
-                                    @else
-                                        Poliklinik tidak ditemukan<br>
-                                    @endif
-                                    Antrean: {{ $dokter->total_antrean }} -
-                                    Terlayani: {{ $dokter->total_terlayani }} -
-                                    Batal: {{ $dokter->total_batal }}
-                                </div>
-                            </td>
-                            @forelse ($dokter->daftars as $index => $daftar)
-                                @if ($index > 0) <tr> @endif
-                                <td>{{ sensorNama($daftar->pasien->nm_pasien) }}, <span class="large-number">( {{ $daftar->code }} )</span></td>
-                                </tr>
-                            @empty
-                                <td colspan="4">Tidak ada kunjungan</td>
-                            @endforelse
-                    @endforeach
-                </tbody>
+                
             </table>
