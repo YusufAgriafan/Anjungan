@@ -75,70 +75,53 @@
 <div class="title">Display Daftar Antrean</div>
 
 <div class="table-container" id="table-container">
-    <table class="table" id="table">
-        <thead style="position: sticky; top: 0; z-index: 2;">
-            <tr>
-                <th>Nama Dokter</th>
-                <th>Nama Pasien</th>
-                {{-- <th>Metode Pembayaran</th>
-                <th>Tanggal Kunjungan</th>
-                <th>Poliklinik</th> --}}
-            </tr>
-        </thead>
-        @php
-            function sensorNama($nama) {
-                $length = strlen($nama);
-                $numStars = rand(4, ceil($length / 1.5)); // Jumlah tanda bintang antara 1 dan setengah panjang nama
-                $indexes = [];
-
-                // Pilih indeks unik secara acak untuk menggantikan dengan tanda bintang
-                while (count($indexes) < $numStars) {
-                    $index = rand(0, $length - 1);
-                    if (!in_array($index, $indexes)) {
-                        $indexes[] = $index;
-                    }
-                }
-
-                // Ganti karakter di indeks yang dipilih dengan tanda bintang
-                foreach ($indexes as $index) {
-                    $nama[$index] = '*';
-                }
-
-                return $nama;
-            }
-        @endphp
-        <tbody>
-            @foreach ($dokters as $dokter)
-                <tr>
-                    <td rowspan="{{ $dokter->daftars->count() ?: 1 }}">
-                        {{ $dokter->nama }}
-                        <div class="poli-info">
-                            @if($dokter->poli)
-                                {{ $dokter->poli->nama_poli }}<br>
-                            @else
-                                Poliklinik tidak ditemukan<br>
-                            @endif
-                            Antrean: {{ $dokter->total_antrean }} -
-                            Terlayani: {{ $dokter->total_terlayani }} -
-                            Batal: {{ $dokter->total_batal }}
-                        </div>
-                    </td>
-                    @forelse ($dokter->daftars as $index => $daftar)
-                        @if ($index > 0) <tr> @endif
-                        <td>{{ sensorNama($daftar->pasien->nm_pasien) }}, <span class="large-number">( {{ $daftar->code }} )</span></td>
-                        </tr>
-                    @empty
-                        <td colspan="4">Tidak ada kunjungan</td>
-                    @endforelse
-            @endforeach
-        </tbody>
-    </table>
+    <div id="antrean">
+        @include('tampilan_daftar_partial', [
+            'dokters' => $dokters
+        ])
+    </div>
 </div>
 
-<!-- Menggunakan Bootstrap JS dan jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script>
+
+        $(document).ready(function() {
+            read()
+        });
+
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('{{ env("PUSHER_APP_KEY") }}', {
+            cluster: 'ap1',
+            encrypted: true
+        });
+
+        var channel = pusher.subscribe('antrean-channel');
+        channel.bind('events.AntreanUpdated', function(data) {
+            // alert(data.message);
+            read();
+        });
+
+        function read() {
+            $.get("{{ url('update-tampilan') }}", function(data, status) {
+                // console.log('Data received:', data);
+                $("#antrean").html(data);
+            });
+        }
+    </script>
 
 </body>
 </html>

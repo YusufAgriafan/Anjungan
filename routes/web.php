@@ -35,6 +35,7 @@ Route::get('/update-daftarAntrean/{codeLoket}', [AdminAntreanController::class, 
 Route::get('/update-daftarAntrean2/{codeLoket}', [AdminAntreanController::class, 'updateDaftarAntrean2'])->name('update.daftar.antrean2');
 Route::get('/update-panggil', [AdminAntreanController::class, 'updatePanggil'])->name('update.panggil');
 Route::get('/tampilan-daftar', [AntreanController::class, 'tampilanDaftar'])->name('tampilanDaftar');
+Route::get('/update-tampilan', [AntreanController::class, 'updateTampilan'])->name('update.tampilan');
 
 Route::get('/daftar', [MainController::class, 'daftar'])->name('daftar');
 

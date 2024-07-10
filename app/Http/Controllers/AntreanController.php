@@ -70,7 +70,7 @@ class AntreanController extends Controller
         $dokters = Dokter::with(['poli', 'daftars.pasien'])->get()->map(function($dokter) {
             $dokter->total_antrean = $dokter->daftars->count();
             $dokter->total_terlayani = $dokter->daftars->filter(function($daftar) {
-                return $daftar->antrean && $daftar->antrean->serve == '1';
+                return $daftar->antrean && $daftar->antrean->served == '1';
             })->count();
             $dokter->total_batal = $dokter->daftars->filter(function($daftar) {
                 return $daftar->antrean && $daftar->antrean->cancel == '1';
@@ -79,6 +79,22 @@ class AntreanController extends Controller
         });
 
         return view('tampilan_daftar', compact('dokters'));
+    }
+
+    public function updateTampilan()
+    {
+        $dokters = Dokter::with(['poli', 'daftars.pasien'])->get()->map(function($dokter) {
+            $dokter->total_antrean = $dokter->daftars->count();
+            $dokter->total_terlayani = $dokter->daftars->filter(function($daftar) {
+                return $daftar->antrean && $daftar->antrean->served == '1';
+            })->count();
+            $dokter->total_batal = $dokter->daftars->filter(function($daftar) {
+                return $daftar->antrean && $daftar->antrean->cancel == '1';
+            })->count();
+            return $dokter;
+        });
+
+        return view('tampilan_daftar_partial', compact('dokters'));
     }
 
 

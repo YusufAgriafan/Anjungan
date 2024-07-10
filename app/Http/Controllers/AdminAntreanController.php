@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Pusher;
 use App\Models\Loket;
+use App\Models\Daftar;
 use App\Models\Antrean;
 use Illuminate\Http\Request;
 use App\Events\AntreanUpdated;
@@ -15,6 +16,8 @@ class AdminAntreanController extends Controller
     public function resetAntrean()
     {
         Antrean::truncate();
+
+        Daftar::query()->update(['code' => '1']);
 
         $pusher = new \Pusher\Pusher(
             env('PUSHER_APP_KEY'),
