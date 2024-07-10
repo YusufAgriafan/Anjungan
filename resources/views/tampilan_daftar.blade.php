@@ -21,31 +21,39 @@
             font-weight: bold; /* Teks judul lebih tebal */
             color: #343a40; /* Warna teks abu-abu gelap */
         }
-        .table-container {
-            height: 80vh; /* Mengatur tinggi maksimum tabel agar full display */
-            overflow: hidden; /* Mengizinkan tabel untuk scroll vertikal */
+        .table-container, .table-container2 {
             margin: 0 auto;
             width: 95%;
             background-color: white; /* Warna background putih */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan untuk tabel */
-            border-radius: 10px; /* Membulatkan sudut tabel */
-            padding: 20px;
-            position: relative; /* Diperlukan untuk animasi */
+            border-radius: 3px; /* Membulatkan sudut tabel */
+            padding: 10px;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 2px solid #dee2e6; /* Warna garis antar kotak tabel */
-            transform: translateY(100%); /* Mulai dari luar kontainer */
-            animation: scrollTable 20s linear infinite; /* Animasi scroll */
+        .table-container {
+            margin-bottom: 0; /* Menghilangkan margin bawah tabel pertama */
+        }
+        .table-container2 {
+            height: 80vh; /* Mengatur tinggi maksimum tabel agar full display */
+            overflow: hidden; /* Mengizinkan tabel untuk scroll vertikal */
+            position: relative;
+            margin-top: 0; /* Menghilangkan margin atas tabel kedua */
+        }
+        .scrolling-table {
+            animation: scrollTable 20s linear infinite;
+            transform: translateY(100%);
         }
         @keyframes scrollTable {
             0% {
                 transform: translateY(100%);
             }
             100% {
-                transform: translateY(-100%); /* Geser ke atas hingga habis */
+                transform: translateY(-100%);
             }
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 3px solid #dee2e6; /* Warna garis antar kotak tabel */
         }
         th, td {
             padding: 12px;
@@ -59,6 +67,9 @@
             background-color: #007bff; /* Warna background header tabel biru */
             color: white; /* Warna teks header tabel putih */
             border-top: 2px solid #dee2e6; /* Garis antar kotak vertikal */
+            position: sticky; /* Header tetap di atas saat scroll */
+            top: 0;
+            z-index: 2;
         }
         tr:nth-child(even) {
             background-color: #f2f2f2; /* Warna background baris genap */
@@ -73,14 +84,16 @@
 <body>
 
 <div class="title">Display Daftar Antrean</div>
-
-<div class="table-container" id="table-container">
     <div id="antrean">
         @include('tampilan_daftar_partial', [
             'dokters' => $dokters
         ])
     </div>
-</div>
+
+<!-- Menggunakan Bootstrap JS dan jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -122,6 +135,5 @@
             });
         }
     </script>
-
 </body>
 </html>
