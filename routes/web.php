@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
