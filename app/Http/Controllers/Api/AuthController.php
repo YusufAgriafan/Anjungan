@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Api;
 use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -32,22 +33,24 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $attrs = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'password' => 'required|min:6'
+            'no_kartu_berobat' => 'required|exists:apis,no_kartu_berobat',
+            'no_rkm_medis' => 'required|exists:apis,no_rkm_medis',
         ]);
 
-        if(!Auth::attempt($attrs))
-        {
-            return response([
+        $api = Api::where('no_kartu_berobat', $attrs['no_kartu_berobat'])
+                    ->where('no_rkm_medis', $attrs['no_rkm_medis'])
+                    ->first();
+
+        if (!$api) {
+            return response()->json([
                 'message' => 'Invalid credentials.'
             ], 403);
         }
 
-        return response([
-            'user' => auth()->user(),
-            'token' => auth()->user()->createToken('secret')->plainTextToken
-        ]);
+        return response()->json([
+            'api' => $api,
+            'token' => $api->createToken('secret')->plainTextToken
+        ], 200);
     }
 
     public function logout()
@@ -60,8 +63,9 @@ class AuthController extends Controller
 
     public function user()
     {
-        return response([
-            'user' => auth()->user()
+        return response()->json([
+            'api' => auth()->user()
         ], 200);
     }
+    
 }

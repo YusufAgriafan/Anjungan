@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -143,6 +144,23 @@ class DatabaseSeeder extends Seeder
             ['pasien_id' => $janeDoeId, 'dokter_id' => $drSriId, 'code' => 'A2', 'metode_pembayaran' => 'Asuransi', 'tanggal_kunjungan' => '2024-06-27', 'kd_poli' => 'U0002', 'created_at' => now(), 'updated_at' => now()],
             ['pasien_id' => $aliceSmithId, 'dokter_id' => $drLisaId, 'code' => 'B1', 'metode_pembayaran' => 'Tunai', 'tanggal_kunjungan' => '2024-06-28', 'kd_poli' => 'U0003', 'created_at' => now(), 'updated_at' => now()],
             ['pasien_id' => $bobJohnsonId, 'dokter_id' => $drMikeId, 'code' => 'B2', 'metode_pembayaran' => 'BPJS', 'tanggal_kunjungan' => '2024-06-29', 'kd_poli' => 'U0004', 'created_at' => now(), 'updated_at' => now()],
+        ]);
+
+        DB::table('apis')->insert([
+            'no_kartu_berobat' => rand(100000, 999999),
+            'no_rkm_medis' => rand(10000000, 99999999),
+            'nm_pasien' => 'John Doe',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Kamu bisa menambahkan data lainnya
+        DB::table('apis')->insert([
+            'no_kartu_berobat' => rand(100000, 999999),
+            'no_rkm_medis' => rand(10000000, 99999999),
+            'nm_pasien' => 'Jane Smith',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }
